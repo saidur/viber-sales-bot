@@ -77,9 +77,11 @@ function findJobs (botResponse,jobCategory)
 
     say(botResponse, 'One second...Let me find out the results!');
 
-    
+    var url  = 'http://www.chakri.com/chkapi/rest/usernotification?key=16486';
+
     request('http://www.chakri.com/chkapi/rest/usernotification?key=16486', function(error, requestResponse, body) {
         if (error || requestResponse.statusCode !== 200) {
+            logger.debug('Error' + error);
             say(botResponse, 'Something is wrong with chakri.com.');
             return;
         }
@@ -88,7 +90,7 @@ function findJobs (botResponse,jobCategory)
            
                 logger.debug('Body' + body);
                 var jobResponse = JSON.parse(body);
-
+                logger.debug('Job response' + jobResponse);
 
                 //res.writeHead(200, {'Content-Type': 'text/plain'});
             for (var i=0; i<jobResponse.data.length; i++){
