@@ -43,37 +43,7 @@ function jobMessage (response,message) {
     response.send(new  UrlMessage(message));
 }
 
-function checkUrlAvailability(botResponse, urlToCheck) {
-    
-    if (urlToCheck === '') {
-        say(botResponse, 'I need a URL to check');
-        return;
-    }
 
-    say(botResponse, 'One second...Let me check!');
-
-    var url = urlToCheck.replace(/^http:\/\//, '');
-    
-    
-    request('http://isup.me/' + url, function(error, requestResponse, body) {
-        if (error || requestResponse.statusCode !== 200) {
-            say(botResponse, 'Something is wrong with isup.me.');
-            return;
-        }
-
-        if (!error && requestResponse.statusCode === 200) {
-            if (body.search('is up') !== -1) {
-                say(botResponse, 'Hooray! ' + urlToCheck + '. looks good to me.');
-            } else if (body.search('Huh') !== -1) {
-                say(botResponse, 'Hmmmmm ' + urlToCheck + '. does not look like a website to me. Typo? please follow the format `test.com`');
-            } else if (body.search('down from here') !== -1) {
-                say(botResponse, 'Oh no! ' + urlToCheck + '. is broken.');
-            } else {
-                say(botResponse, 'Snap...Something is wrong with isup.me.');
-            }       
-        }
-    })
-}
 
 function apiSend(botResponse,category) {
 
@@ -111,6 +81,18 @@ function apiSend(botResponse,category) {
                     var item_url = JSON.stringify(jobResponse.data[i].item_url);
                     //item_url = 'http://www.chakri.com/job/show/35585/probationary-officer';    
                     console.log("Got a response: ", item_url);
+                    /*if (!error && requestResponse.statusCode === 200) {
+                        if (body.search('is up') !== -1) {
+                            say(botResponse, 'Hooray! ' + urlToCheck + '. looks good to me.');
+                        } else if (body.search('Huh') !== -1) {
+                            say(botResponse, 'Hmmmmm ' + urlToCheck + '. does not look like a website to me. Typo? please follow the format `test.com`');
+                        } else if (body.search('down from here') !== -1) {
+                            say(botResponse, 'Oh no! ' + urlToCheck + '. is broken.');
+                        } else {
+                            say(botResponse, 'Snap...Something is wrong with isup.me.');
+                        }       
+                    }*/
+
 
                     var myelement = {
                         tracking_data: job_title,
@@ -199,7 +181,7 @@ text name
 
 bot.onTextMessage(/^hi|hello$/i, (message, response) => {
 
-     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name} `));
+     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name} . welcome to chakri.com . Fell free to ask me if you are looking for jobs. Type the category of jobs`));
 });
 
 bot.onTextMessage(/./, (message, response) => {
