@@ -135,7 +135,7 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     }
 });
 /*
-text
+text name
 */
 
 bot.onTextMessage(/^hi|hello$/i, (message, response) => {
