@@ -14,6 +14,8 @@ const StickerMessage  = require('viber-bot').Message.Sticker;
 const RichMediaMessage  = require('viber-bot').Message.RichMedia;
 const KeyboardMessage  = require('viber-bot').Message.Keyboard;
 
+const logger = createLogger();
+const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
   
 
 var request = require('request');
@@ -33,7 +35,7 @@ function say(response, message) {
 
 
 function checkUrlAvailability(botResponse, urlToCheck) {
-
+    
     if (urlToCheck === '') {
         say(botResponse, 'I need a URL to check');
         return;
@@ -42,6 +44,8 @@ function checkUrlAvailability(botResponse, urlToCheck) {
     say(botResponse, 'One second...Let me check!');
 
     var url = urlToCheck.replace(/^http:\/\//, '');
+    
+    
     request('http://isup.me/' + url, function(error, requestResponse, body) {
         if (error || requestResponse.statusCode !== 200) {
             say(botResponse, 'Something is wrong with isup.me.');
@@ -62,6 +66,8 @@ function checkUrlAvailability(botResponse, urlToCheck) {
     })
 }
 
+
+
 function findJobs (botResponse,jobCategory)
 {
      if (jobCategory === '') {
@@ -71,11 +77,8 @@ function findJobs (botResponse,jobCategory)
 
     say(botResponse, 'One second...Let me find out the results!');
 
-    say(botResponse, 'http://www.chakri.com/job/show/35637/lecturer-english');
     
-    return true;
-
-    request('http://isup.me/' + url, function(error, requestResponse, body) {
+    request('http://www.chakri.com/chkapi/rest/usernotification?key=16486', function(error, requestResponse, body) {
         if (error || requestResponse.statusCode !== 200) {
             say(botResponse, 'Something is wrong with chakri.com.');
             return;
@@ -83,7 +86,31 @@ function findJobs (botResponse,jobCategory)
 
         if (!error && requestResponse.statusCode === 200) {
            
-           
+                logger.debug('Body' + body);
+                var jobResponse = JSON.parse(body);
+
+
+                //res.writeHead(200, {'Content-Type': 'text/plain'});
+            for (var i=0; i<jobResponse.data.length; i++){
+                
+                var id = JSON.stringify(jobResponse.data[i].id);
+                var job_title = JSON.stringify(jobResponse.data[i].job_title);
+                var category = JSON.stringify(jobResponse.data[i].category);
+                var item_url = JSON.stringify(jobResponse.data[i].item_url);
+
+                console.log("Got a response: ", item_url);
+
+                var myelement = {
+                        "tracking_data": job_title,
+                        "type": "url",
+                        "media": item_url
+                    };
+
+                
+                say(botResponse, myelement);    
+            
+            
+            }
 
             // Multiple messages
                       
@@ -107,8 +134,6 @@ function findJobs (botResponse,jobCategory)
     
 }
 
-const logger = createLogger();
-const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
 
 if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
     logger.debug('Could not find the Viber Public Account access token key in your environment variable. Please make sure you followed readme guide.');
