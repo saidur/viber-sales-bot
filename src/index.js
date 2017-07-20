@@ -124,10 +124,10 @@ function apiSend(botResponse) {
               
                 
                 logger.debug("my element" + myelement );
-                
+               say(botResponse,item_url); 
             }  
 
-             jobMessage(botResponse, myelement);
+             //jobMessage(botResponse, myelement);
             
             });
         }).on('error', function(e){
