@@ -1,19 +1,21 @@
 'use strict';
 
-const ViberBot = require('viber-bot').Bot;
-const BotEvents = require('viber-bot').Events;
-const TextMessage = require('viber-bot').Message.Text;
-const winston = require('winston');
-const toYAML = require('winston-console-formatter');
-const UrlMessage  = require('viber-bot').Message.Url;
-const ContactMessage  = require('viber-bot').Message.Contact;
-const PictureMessage  = require('viber-bot').Message.Picture;
-const VideoMessage    = require('viber-bot').Message.Video;
-const LocationMessage = require('viber-bot').Message.Location;
-const StickerMessage  = require('viber-bot').Message.Sticker;
+const ViberBot          = require('viber-bot').Bot;
+const BotEvents         = require('viber-bot').Events;
+const TextMessage       = require('viber-bot').Message.Text;
+const winston           = require('winston');
+const toYAML            = require('winston-console-formatter');
+const UrlMessage        = require('viber-bot').Message.Url;
+const ContactMessage    = require('viber-bot').Message.Contact;
+const PictureMessage    = require('viber-bot').Message.Picture;
+const VideoMessage      = require('viber-bot').Message.Video;
+const LocationMessage   = require('viber-bot').Message.Location;
+const StickerMessage    = require('viber-bot').Message.Sticker;
 const RichMediaMessage  = require('viber-bot').Message.RichMedia;
-const KeyboardMessage  = require('viber-bot').Message.Keyboard;
-const URL = require('url');
+const KeyboardMessage   = require('viber-bot').Message.Keyboard;
+const URL               = require('url');
+const natural           = require('natural');
+const stemmer           = natural.PorterStemmer;
 
 
 const logger = createLogger();
@@ -73,9 +75,11 @@ function checkUrlAvailability(botResponse, urlToCheck) {
     })
 }
 
-function apiSend(botResponse) {
+function apiSend(botResponse,category) {
 
-    var queryUrl = "http://www.chakri.com/chkapi/rest/usernotification?key=16486";
+
+    var queryUrl = "http://www.chakri.com/chkapi/rest/jobnotification?category_name="+category+"&key=16486";
+    
     var url = queryUrl;
     
     var myTemplate = {
@@ -84,12 +88,7 @@ function apiSend(botResponse) {
                         "media": "http://www.chakri.com"
                     };
     
-    var options = {
-        url: queryUrl,
-        method: 'POST',
-        body: myTemplate,
-        json: true
-    }
+    
 
     http.get(url, function(res){
             
@@ -141,16 +140,16 @@ function apiSend(botResponse) {
 function findJobs (botResponse,jobCategory)
 {
      if (jobCategory === '') {
-        say(botResponse, 'I need a Job Category to check , like : It , Bank , Education .. etc');
+        say(botResponse, 'I need a Job Category to give you results.  like : IT , Bank , Accounting .. etc');
         return;
     } 
 
     say(botResponse, 'One second...Let me find out the results!');
 
-    apiSend(botResponse);
+    apiSend(botResponse,jobCategory);
 
     // Multiple messages
-    /* bot.sendMessage(userProfile, [
+    /* bot.sendMessage(botResponse, [
                 new TextMessage("Here's the product you've requested:"),
                 new UrlMessage("http://my.ecommerce.site/product1"),
                 new TextMessage("Shipping time: 1-3 business days")
@@ -200,7 +199,7 @@ text name
 
 bot.onTextMessage(/^hi|hello$/i, (message, response) => {
 
-     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`));
+     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name} `));
 });
 
 bot.onTextMessage(/./, (message, response) => {
