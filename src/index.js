@@ -5,8 +5,18 @@ const BotEvents = require('viber-bot').Events;
 const TextMessage = require('viber-bot').Message.Text;
 const winston = require('winston');
 const toYAML = require('winston-console-formatter');
-var request = require('request');
+const UrlMessage  = require('viber-bot').Message.Url;
+const ContactMessage  = require('viber-bot').Message.Contact;
+const PictureMessage  = require('viber-bot').Message.Picture;
+const VideoMessage    = require('viber-bot').Message.Video;
+const LocationMessage = require('viber-bot').Message.Location;
+const StickerMessage  = require('viber-bot').Message.Sticker;
+const RichMediaMessage  = require('viber-bot').Message.RichMedia;
+const KeyboardMessage  = require('viber-bot').Message.Keyboard;
 
+  
+
+var request = require('request');
 
 function createLogger() {
     const logger = new winston.Logger({
@@ -20,6 +30,7 @@ function createLogger() {
 function say(response, message) {
     response.send(new TextMessage(message));
 }
+
 
 function checkUrlAvailability(botResponse, urlToCheck) {
 
@@ -51,6 +62,51 @@ function checkUrlAvailability(botResponse, urlToCheck) {
     })
 }
 
+function botJobs (botResponse,jobCategory)
+{
+     if (jobCategory === '') {
+        say(botResponse, 'I need a Job Category to check , like : It , Bank , Education .. etc');
+        return;
+    } 
+
+    say(botResponse, 'One second...Let me find out the results!');
+
+    say(botResponse, 'http://www.chakri.com/job/show/35637/lecturer-english');
+    
+    return true;
+
+    request('http://isup.me/' + url, function(error, requestResponse, body) {
+        if (error || requestResponse.statusCode !== 200) {
+            say(botResponse, 'Something is wrong with chakri.com.');
+            return;
+        }
+
+        if (!error && requestResponse.statusCode === 200) {
+           
+           
+
+            // Multiple messages
+                      
+           /* bot.sendMessage(userProfile, [
+                new TextMessage("Here's the product you've requested:"),
+                new UrlMessage("http://my.ecommerce.site/product1"),
+                new TextMessage("Shipping time: 1-3 business days")
+            ]);*/
+           
+            /*if (body.search('is up') !== -1) {
+                say(botResponse, 'Hooray! ' + urlToCheck + '. looks good to me.');
+            } else if (body.search('Huh') !== -1) {
+                say(botResponse, 'Hmmmmm ' + urlToCheck + '. does not look like a website to me. Typo? please follow the format `test.com`');
+            } else if (body.search('down from here') !== -1) {
+                say(botResponse, 'Oh no! ' + urlToCheck + '. is broken.');
+            } else {
+                say(botResponse, 'Snap...Something is wrong with isup.me.');
+            }  */    
+        }
+    })
+    
+}
+
 const logger = createLogger();
 const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
 
@@ -68,7 +124,7 @@ const bot = new ViberBot(logger, {
 
 // The user will get those messages on first registration
 bot.onSubscribe(response => {
-    say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if a web site is down for everyone or just you. Just send me a name of a website and I'll do the rest!`);
+    say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if you are looking for jobs or how to create your cv more meaningful. If you are looking for job, Just send me a name of a jobs category and I'll do the rest!`);
 });
 
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
@@ -79,8 +135,15 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
 });
 
 bot.onTextMessage(/./, (message, response) => {
-    checkUrlAvailability(response, message.text);
+    //checkUrlAvailability(response, message.text);
+    findJobs (response, message.text);
 });
+
+bot.onTextMessage(/^hi|hello$/i, (message, response) => {
+
+    response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`));
+});
+
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
 
