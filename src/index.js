@@ -62,7 +62,7 @@ function checkUrlAvailability(botResponse, urlToCheck) {
     })
 }
 
-function botJobs (botResponse,jobCategory)
+function findJobs (botResponse,jobCategory)
 {
      if (jobCategory === '') {
         say(botResponse, 'I need a Job Category to check , like : It , Bank , Education .. etc');
