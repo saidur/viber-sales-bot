@@ -37,7 +37,7 @@ function say(response, message) {
     response.send(new TextMessage(message));
 }
 
-function jobMessage (response,content) {
+function jobMessage (response,message) {
     response.send(new  UrlMessage(message));
 }
 
