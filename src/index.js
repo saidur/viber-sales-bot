@@ -179,7 +179,7 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
 text name
 */
 
-bot.onTextMessage(/^hi|hello$/i, (message, response) => {
+bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
 
      response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name} . welcome to chakri.com . Fell free to ask me if you are looking for jobs. Type the category of jobs`));
 });
