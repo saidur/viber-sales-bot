@@ -116,7 +116,7 @@ function apiSend(botResponse) {
                     var myelement = {
                         tracking_data: job_title,
                         type: "url",
-                        media: new URL(item_url)
+                        media: item_url
                         
                         
                 };
