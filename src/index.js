@@ -114,23 +114,20 @@ function apiSend(botResponse) {
                     console.log("Got a response: ", item_url);
 
                     var myelement = {
-                        tracking_data: "",
-                        type: "wurl",
-                        media: ""
+                        tracking_data: job_title,
+                        type: "url",
+                        media: new URL(item_url)
                         
                         
                 };
                 
-               // const myURL = new URL('https://你好你好');
-                myelement.title = job_title;
-                myelement.media = new URL(item_url);
-                myTemplate.message.attachment.payload.elements.push(myelement);
+              
                 
-                logger.debug("my element" + myTemplate );
+                logger.debug("my element" + myelement );
                 
             }  
 
-             jobMessage(botResponse, myTemplate);
+             jobMessage(botResponse, myelement);
             
             });
         }).on('error', function(e){
