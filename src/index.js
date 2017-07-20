@@ -19,8 +19,10 @@ const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-
   
 
 var request = require('request');
+var http = require('http');
 
-function createLogger() {
+function createLogger() 
+{
     const logger = new winston.Logger({
         level: "debug" // We recommend using the debug level for development
     });
@@ -33,6 +35,9 @@ function say(response, message) {
     response.send(new TextMessage(message));
 }
 
+function jobMessage (response,content) {
+    response.send(new  UrlMessage(message));
+}
 
 function checkUrlAvailability(botResponse, urlToCheck) {
     
@@ -66,7 +71,72 @@ function checkUrlAvailability(botResponse, urlToCheck) {
     })
 }
 
+function apiSend(botResponse) {
 
+    var queryUrl = "http://www.chakri.com/chkapi/rest/usernotification?key=16486";
+    var url = queryUrl;
+    
+    var myTemplate = {
+                        "tracking_data": "tracking data",
+                        "type": "url",
+                        "media": "http://www.chakri.com"
+                    };
+    
+    var options = {
+        url: queryUrl,
+        method: 'POST',
+        body: myTemplate,
+        json: true
+    }
+
+    http.get(url, function(res){
+            
+            var body = '';
+            
+            res.on('data', function(chunk){
+                body += chunk;
+            });
+
+            res.on('end', function(){
+                logger.debug(body);
+                var jobResponse = JSON.parse(body);
+                logger.debug(jobResponse);
+                
+                for (var i=0; i<jobResponse.data.length; i++){
+                    
+                    var id = JSON.stringify(jobResponse.data[i].id);
+                    var job_title = JSON.stringify(jobResponse.data[i].job_title);
+                    var category = JSON.stringify(jobResponse.data[i].category);
+                    var item_url = JSON.stringify(jobResponse.data[i].item_url);
+
+                    console.log("Got a response: ", item_url);
+
+                    var myelement = {
+                        tracking_data: "",
+                        type: "wurl",
+                        media: ""
+                        
+                        
+                };
+                
+                myelement.title = job_title;
+                myelement.media = item_url;
+                myTemplate.message.attachment.payload.elements.push(myelement);
+                
+                logger.debug("my element" + myTemplate );
+                
+            }  
+
+             jobMessage(botResponse, myTemplate);
+            
+            });
+        }).on('error', function(e){
+            console.log("Got an error: ", e);
+    });
+
+
+ 
+};
 
 function findJobs (botResponse,jobCategory)
 {
@@ -77,46 +147,10 @@ function findJobs (botResponse,jobCategory)
 
     say(botResponse, 'One second...Let me find out the results!');
 
-    var url  = 'http://www.chakri.com/chkapi/rest/usernotification?key=16486';
+    apiSend(botResponse);
 
-    request('http://www.chakri.com/chkapi/rest/usernotification?key=16486', function(error, requestResponse, body) {
-        if (error || requestResponse.statusCode !== 200) {
-            logger.debug('Error' + error);
-            say(botResponse, 'Something is wrong with chakri.com.');
-            return;
-        }
-
-        if (!error && requestResponse.statusCode === 200) {
-           
-                logger.debug('Body' + body);
-                var jobResponse = JSON.parse(body);
-                logger.debug('Job response' + jobResponse);
-
-                //res.writeHead(200, {'Content-Type': 'text/plain'});
-            for (var i=0; i<jobResponse.data.length; i++){
-                
-                var id = JSON.stringify(jobResponse.data[i].id);
-                var job_title = JSON.stringify(jobResponse.data[i].job_title);
-                var category = JSON.stringify(jobResponse.data[i].category);
-                var item_url = JSON.stringify(jobResponse.data[i].item_url);
-
-                console.log("Got a response: ", item_url);
-
-                var myelement = {
-                        "tracking_data": job_title,
-                        "type": "url",
-                        "media": item_url
-                    };
-
-                
-                say(botResponse, myelement);    
-            
-            
-            }
-
-            // Multiple messages
-                      
-           /* bot.sendMessage(userProfile, [
+    // Multiple messages
+    /* bot.sendMessage(userProfile, [
                 new TextMessage("Here's the product you've requested:"),
                 new UrlMessage("http://my.ecommerce.site/product1"),
                 new TextMessage("Shipping time: 1-3 business days")
@@ -131,8 +165,7 @@ function findJobs (botResponse,jobCategory)
             } else {
                 say(botResponse, 'Snap...Something is wrong with isup.me.');
             }  */    
-        }
-    })
+       
     
 }
 
