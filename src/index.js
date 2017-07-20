@@ -134,10 +134,13 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
         say(response, 'Sorry. I can only understand text messages.');
     }
 });
+/*
+text
+*/
 
 bot.onTextMessage(/^hi|hello$/i, (message, response) => {
 
-    response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`));
+     response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`));
 });
 
 bot.onTextMessage(/./, (message, response) => {
