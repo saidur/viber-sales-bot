@@ -109,7 +109,7 @@ function apiSend(botResponse,category) {
                     var job_title = JSON.stringify(jobResponse.data[i].job_title);
                     var category = JSON.stringify(jobResponse.data[i].category);
                     var item_url = JSON.stringify(jobResponse.data[i].item_url);
-                    item_url = 'http://www.chakri.com/job/show/35585/probationary-officer';    
+                    //item_url = 'http://www.chakri.com/job/show/35585/probationary-officer';    
                     console.log("Got a response: ", item_url);
 
                     var myelement = {
