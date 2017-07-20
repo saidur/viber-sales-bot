@@ -13,6 +13,8 @@ const LocationMessage = require('viber-bot').Message.Location;
 const StickerMessage  = require('viber-bot').Message.Sticker;
 const RichMediaMessage  = require('viber-bot').Message.RichMedia;
 const KeyboardMessage  = require('viber-bot').Message.Keyboard;
+const URL = require('url');
+
 
 const logger = createLogger();
 const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
@@ -119,8 +121,9 @@ function apiSend(botResponse) {
                         
                 };
                 
+               // const myURL = new URL('https://你好你好');
                 myelement.title = job_title;
-                myelement.media = item_url;
+                myelement.media = new URL(item_url);
                 myTemplate.message.attachment.payload.elements.push(myelement);
                 
                 logger.debug("my element" + myTemplate );
