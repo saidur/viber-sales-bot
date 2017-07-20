@@ -122,6 +122,7 @@ const bot = new ViberBot(logger, {
     avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
 });
 
+
 // The user will get those messages on first registration
 bot.onSubscribe(response => {
     say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if you are looking for jobs or how to create your cv more meaningful. If you are looking for job, Just send me a name of a jobs category and I'll do the rest!`);
@@ -134,15 +135,17 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     }
 });
 
+bot.onTextMessage(/^hi|hello$/i, (message, response) => {
+
+    response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`));
+});
+
 bot.onTextMessage(/./, (message, response) => {
     //checkUrlAvailability(response, message.text);
     findJobs (response, message.text);
 });
 
-bot.onTextMessage(/^hi|hello$/i, (message, response) => {
 
-    response.send(new TextMessage(`Hi there ${response.userProfile.name}. I am ${bot.name}`));
-});
 
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
