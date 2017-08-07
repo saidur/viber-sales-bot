@@ -1,10 +1,13 @@
 'use strict';
+// Bring in our dependencies
+const app               = require('app')();
+const routes            = require('../routes');
+const env               = require('../env.json');
 
+// viber
 const ViberBot          = require('viber-bot').Bot;
 const BotEvents         = require('viber-bot').Events;
 const TextMessage       = require('viber-bot').Message.Text;
-const winston           = require('winston');
-const toYAML            = require('winston-console-formatter');
 const UrlMessage        = require('viber-bot').Message.Url;
 const ContactMessage    = require('viber-bot').Message.Contact;
 const PictureMessage    = require('viber-bot').Message.Picture;
@@ -16,14 +19,48 @@ const KeyboardMessage   = require('viber-bot').Message.Keyboard;
 const URL               = require('url');
 const natural           = require('natural');
 const stemmer           = natural.PorterStemmer;
+const logger            = createLogger();
+// logger
+const winston           = require('winston');
+const toYAML            = require('winston-console-formatter');
 
+// Database
+//var mongo = require('mongodb');
+//var monk = require('monk');
+//var db = monk('localhost:27017/viberbot');
 
-const logger = createLogger();
-const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/viberbot";
+
+MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
   
+  var myobj = [
+    { viber_id: '1', mobile: '01673615816',status:'yes'}
+   
+  ];
+  db.collection("users").insertMany(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("Number of records inserted: " + res.insertedCount);
+    db.close();
+  });
+});
+
+
+
+const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
+
 
 var request = require('request');
 var http = require('http');
+var index = require('../routes/index');
+//app.use('/index', index);
+// Creating the bot with access token, name and avatar
+const bot = new ViberBot(logger, {
+    authToken: VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY, // Learn how to get your access token at developers.viber.com
+    name: "Chakri",
+    avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
+});
 
 function createLogger() 
 {
@@ -46,7 +83,6 @@ function jobMessage (response,message) {
 
 
 function apiSend(botResponse,category) {
-
 
     var queryUrl = "http://www.chakri.com/chkapi/rest/jobnotification?category_name="+category+"&key=16486";
     
@@ -81,19 +117,7 @@ function apiSend(botResponse,category) {
                     var item_url = JSON.stringify(jobResponse.data[i].item_url);
                     //item_url = 'http://www.chakri.com/job/show/35585/probationary-officer';    
                     console.log("Got a response: ", item_url);
-                    /*if (!error && requestResponse.statusCode === 200) {
-                        if (body.search('is up') !== -1) {
-                            say(botResponse, 'Hooray! ' + urlToCheck + '. looks good to me.');
-                        } else if (body.search('Huh') !== -1) {
-                            say(botResponse, 'Hmmmmm ' + urlToCheck + '. does not look like a website to me. Typo? please follow the format `test.com`');
-                        } else if (body.search('down from here') !== -1) {
-                            say(botResponse, 'Oh no! ' + urlToCheck + '. is broken.');
-                        } else {
-                            say(botResponse, 'Snap...Something is wrong with isup.me.');
-                        }       
-                    }*/
-
-
+              
                     var myelement = {
                         tracking_data: job_title,
                         type: "url",
@@ -101,8 +125,6 @@ function apiSend(botResponse,category) {
                         
                         
                 };
-                
-              
                 
                 logger.debug("my element" + myelement );
                say(botResponse,item_url); 
@@ -129,26 +151,37 @@ function findJobs (botResponse,jobCategory)
     say(botResponse, 'One second...Let me find out the results!');
 
     apiSend(botResponse,jobCategory);
-
-    // Multiple messages
-    /* bot.sendMessage(botResponse, [
-                new TextMessage("Here's the product you've requested:"),
-                new UrlMessage("http://my.ecommerce.site/product1"),
-                new TextMessage("Shipping time: 1-3 business days")
-            ]);*/
-           
-            /*if (body.search('is up') !== -1) {
-                say(botResponse, 'Hooray! ' + urlToCheck + '. looks good to me.');
-            } else if (body.search('Huh') !== -1) {
-                say(botResponse, 'Hmmmmm ' + urlToCheck + '. does not look like a website to me. Typo? please follow the format `test.com`');
-            } else if (body.search('down from here') !== -1) {
-                say(botResponse, 'Oh no! ' + urlToCheck + '. is broken.');
-            } else {
-                say(botResponse, 'Snap...Something is wrong with isup.me.');
-            }  */    
-       
     
 }
+
+
+app.get('/', function (req, res) {
+  res.send('Hello from A!')
+});
+
+app.post('/joboffer', function (req, res) {
+  //res.send('Hello from A!')
+  var response = 
+    { 
+      id: response.userProfile.id, 
+      name: response.userProfile.name,
+      avatar:response.userProfile.avatar,
+      country:response.userProfile.country,
+      language:response.userProfile.language
+      
+    } ; 
+   
+    bot.sendMessage(userProfile, 
+        
+        new TextMessage("chakri job link 1"),
+        new TextMessage("chakri job link 2"),
+        new TextMessage("chakri job link 3")
+
+);
+
+});
+
+
 
 
 if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
@@ -156,18 +189,67 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
     return;
 }
 
-// Creating the bot with access token, name and avatar
-const bot = new ViberBot(logger, {
-    authToken: VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY, // Learn how to get your access token at developers.viber.com
-    name: "Chakri",
-    avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
-});
+
+
+
+app.use("/viber/webhook", bot.middleware());
+
+app.get('/viber/public', function (req, res) {
+
+    // Multiple messages
+        /*const UrlMessage  = require('viber-bot').Message.Url;
+        bot.postToPublicChat(userProfile, [
+            new TextMessage("Here's the product you've requested:"),
+            new UrlMessage("http://my.ecommerce.site/product1"),
+            new TextMessage("Shipping time: 1-3 business days")
+        ]);*/
+        //contact = Contact(name="Viber user", phone_number="+8801779253539", avatar="http://link.to.avatar")
+        //contact_message = ContactMessage(contact=contact)
+        
+        var contactName ='Saidur Rahman';
+        var contactPhoneNumber='+8801779253539';
+        const message = new ContactMessage(contactName, contactPhoneNumber);
+        console.log(`${message.contactName}, ${message.contactPhoneNumber}`);
+        bot.getBotProfile().then(response => console.log(`Public Account Named: ${response.name}`));
+
+    });
 
 
 // The user will get those messages on first registration
 bot.onSubscribe(response => {
+
+    var userDetails = bot.getUserDetails(response.userProfile);
+    console.log(userDetails);
+    MongoClient.connect(url, function(err, db) {
+  if (err) throw err;
+  
+  var myobj = [
+    { 
+      viber_id: response.userProfile.id, 
+      name: response.userProfile.name,
+      avatar:response.userProfile.avatar,
+      country:response.userProfile.country,
+      language:response.userProfile.language,
+      status:'yes'
+    }
+   
+  ];
+  db.collection("users").insertMany(myobj, function(err, res) {
+    if (err) throw err;
+    console.log("Number of records inserted: " + res.insertedCount);
+    db.close();
+  });
+});
+
+
     say(response, `Hi there ${response.userProfile.name}. I am ${bot.name}! Feel free to ask me if you are looking for jobs or how to create your cv more meaningful. If you are looking for job, Just send me a name of a jobs category and I'll do the rest!`);
 });
+
+bot.onUnsubscribe(response => {
+    var userId = response.userId;
+    console.log(`Unsubscribed: ${userId}`);
+});
+
 
 bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
     // This sample bot can answer only text messages, let's make sure the user is aware of that.
@@ -175,9 +257,7 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
         say(response, 'Sorry. I can only understand text messages.');
     }
 });
-/*
-text name
-*/
+
 
 bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
 
@@ -189,17 +269,17 @@ bot.onTextMessage(/./, (message, response) => {
     findJobs (response, message.text);
 });
 
-
-
-
 const WEB_URL='https://botmela.samuraigeeks.net/';
-
+    
 if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     
     const http = require('http');
     const port = process.env.PORT || 5000;
-
-    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+    console.log('Magic happens on port ' + port);
+    app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
+    //app.listen(port);
+    console.log('Magic happens on port ' + port);
+    //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
 } else {
     logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
 }
