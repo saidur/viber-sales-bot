@@ -1,13 +1,13 @@
 'use strict';
-// Bring in our dependencies
-const app               = require('app')();
-const routes            = require('../routes');
-const env               = require('../env.json');
+const express           = require('express');
+const bodyParser        = require('body-parser');
+const app               = express();
 
-// viber
 const ViberBot          = require('viber-bot').Bot;
 const BotEvents         = require('viber-bot').Events;
 const TextMessage       = require('viber-bot').Message.Text;
+const winston           = require('winston');
+const toYAML            = require('winston-console-formatter');
 const UrlMessage        = require('viber-bot').Message.Url;
 const ContactMessage    = require('viber-bot').Message.Contact;
 const PictureMessage    = require('viber-bot').Message.Picture;
@@ -20,9 +20,6 @@ const URL               = require('url');
 const natural           = require('natural');
 const stemmer           = natural.PorterStemmer;
 const logger            = createLogger();
-// logger
-const winston           = require('winston');
-const toYAML            = require('winston-console-formatter');
 
 // Database
 //var mongo = require('mongodb');
