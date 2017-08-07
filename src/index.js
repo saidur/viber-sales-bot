@@ -29,7 +29,7 @@ const logger            = createLogger();
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/viberbot";
 
-MongoClient.connect(url, function(err, db) {
+/*MongoClient.connect(url, function(err, db) {
   if (err) throw err;
   
   var myobj = [
@@ -41,7 +41,7 @@ MongoClient.connect(url, function(err, db) {
     console.log("Number of records inserted: " + res.insertedCount);
     db.close();
   });
-});
+});*/
 
 
 
