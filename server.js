@@ -56,7 +56,11 @@ const webhookUrl='https://botmela.samuraigeek.net';
 app.use("/viber/webhook", bot.middleware()).listen(5000, () => bot.setWebhook(webhookUrl));
 //https.createServer(httpsOptions, bot.middleware()).listen(port, () => bot.setWebhook(webhookUrl));
 
+app.post('/viber/webhook',function(req,res,next){ 
 
+    console.log('Time: %d', Date.now());
+
+});
 
 app.use(function (req, res, next) {
   console.log('Time: %d', Date.now());
