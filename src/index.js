@@ -131,7 +131,7 @@ function jobRichMessage(response, message) {
         ]
       }
 
-    const SAMPLE_KEYBOARD =
+    /*const SAMPLE_KEYBOARD =
     {
         "Type": "keyboard",
         "Buttons": [{
@@ -157,9 +157,9 @@ function jobRichMessage(response, message) {
             "BgColor": "# f6f7f9",
             "Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
         }]
-    };
+    };*/
     //const SAMPLE_KEYBOARD = '';
-    /*const SAMPLE_KEYBOARD = {
+    const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
         "Buttons": [
@@ -174,7 +174,7 @@ function jobRichMessage(response, message) {
                 "ActionBody": "Yes"
             }
         ]
-    };*/
+    };
     
     //const message = new KeyboardMessage(SAMPLE_KEYBOARD, [optionalTrackingData]);
     //const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA);
