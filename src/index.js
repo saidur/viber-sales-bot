@@ -135,6 +135,7 @@ function jobRichMessage(response, message) {
             "Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
         }]
     };
+    const SAMPLE_KEYBOARD = '';
     /*const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
