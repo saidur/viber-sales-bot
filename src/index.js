@@ -82,7 +82,7 @@ function say(response, message) {
 
 function jobRichMessage(response, message) {
     
-    
+    console.log ('rich message');
     //response.send(new RichMediaMessage (message));
     const SAMPLE_RICH_MEDIA = {
         "ButtonsGroupColumns": 6,
