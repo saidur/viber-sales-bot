@@ -135,7 +135,7 @@ function jobRichMessage(response, message) {
             "Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
         }]
     };
-    const SAMPLE_KEYBOARD = '';
+    //const SAMPLE_KEYBOARD = '';
     /*const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
@@ -154,8 +154,8 @@ function jobRichMessage(response, message) {
     };*/
     
     //const message = new KeyboardMessage(SAMPLE_KEYBOARD, [optionalTrackingData]);
-
-    const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
+    const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA);
+    //const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
     response.send(message_new);
 
 }
