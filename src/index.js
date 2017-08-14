@@ -6,8 +6,8 @@ const app               = express();
 // Bring in our dependencies
 //const app               = require('../app');
 const routes            = require('../routes');
-const env               = require('../env.json');
-
+//const env               = require('../env.json');
+// remove const
 // viber
 const ViberBot          = require('viber-bot').Bot;
 const BotEvents         = require('viber-bot').Events;
