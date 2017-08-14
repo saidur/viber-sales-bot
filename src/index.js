@@ -84,7 +84,7 @@ function jobRichMessage(response, message) {
     
     console.log ('rich message');
     //response.send(new RichMediaMessage (message));
-    const SAMPLE_RICH_MEDIA = {
+    /*const SAMPLE_RICH_MEDIA = {
         "ButtonsGroupColumns": 6,
         "ButtonsGroupRows": 2,
         "BgColor": "#FFFFFF",
@@ -106,7 +106,30 @@ function jobRichMessage(response, message) {
             "Rows": 1,
             "Columns": 6
         }]
-    };
+    };*/
+
+    const SAMPLE_RICH_MEDIA ={
+        "BgColor": "#69C48A",
+        "Buttons": [
+          {
+            "Columns": 6,
+            "Rows": 1,
+            "BgColor": "#454545",
+            "BgMediaType": "gif",
+            "BgMedia": "http://www.url.by/test.gif",
+            "BgLoop": true,
+            "ActionType": "open-url",
+            "Silent": true,
+            "ActionBody": "www.tut.by",
+            "Image": "www.tut.by/img.jpg",
+            "TextVAlign": "middle",
+            "TextHAlign": "left",
+            "Text": "<b>example</b> button",
+            "TextOpacity": 10,
+            "TextSize": "regular"
+          }
+        ]
+      }
 
     const SAMPLE_KEYBOARD =
     {
