@@ -177,8 +177,8 @@ function jobRichMessage(response, message) {
     };*/
     
     //const message = new KeyboardMessage(SAMPLE_KEYBOARD, [optionalTrackingData]);
-    const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA);
-    //const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
+    //const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA);
+    const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
     response.send(message_new);
 
 }
