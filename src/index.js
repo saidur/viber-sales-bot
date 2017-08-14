@@ -108,6 +108,33 @@ function jobRichMessage(response, message) {
         }]
     };
 
+    const SAMPLE_KEYBOARD =
+    {
+        "Type": "keyboard",
+        "Buttons": [{
+            "Columns": 3,
+            "Rows": 2,
+            "Text": "<font color=\"#494E67\">Smoking</font><br><br>",
+            "TextSize": "medium",
+            "TextHAlign": "center",
+            "TextVAlign": "bottom",
+            "ActionType": "reply",
+            "ActionBody": "Smoking",
+            "BgColor": "#f7bb3f",
+            "Image": "https: //s12.postimg.org/ti4alty19/smoke.png"
+        }, {
+            "Columns": 3,
+            "Rows": 2,
+            "Text": "<font color=\"#494E67\">Non Smoking</font><br><br>",
+            "TextSize": "medium",
+            "TextHAlign": "center",
+            "TextVAlign": "bottom",
+            "ActionType": "reply",
+            "ActionBody": "Non smoking",
+            "BgColor": "# f6f7f9",
+            "Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
+        }]
+    };
     /*const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
@@ -127,7 +154,7 @@ function jobRichMessage(response, message) {
     
     //const message = new KeyboardMessage(SAMPLE_KEYBOARD, [optionalTrackingData]);
 
-    const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA);
+    const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
     response.send(message_new);
 
 }
