@@ -188,11 +188,11 @@ function apiSend(botResponse,category) {
                 };
                 
                 logger.debug("my element" + myelement );
-                 say(botResponse,item_url); 
-
+                 //say(botResponse,item_url); 
+                 jobRichMessage(botResponse,item_url);
                 
             }  
-            jobRichMessage(botResponse,item_url);
+           // jobRichMessage(botResponse,item_url);
 
              //jobMessage(botResponse, myelement);
             
