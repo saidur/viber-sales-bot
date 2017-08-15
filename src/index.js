@@ -383,19 +383,10 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
 
 
 
-app.use("/viber/webhook", bot.middleware());
+//app.use("/viber/webhook", bot.middleware());
 
-app.get('/viber/public', function (req, res) {
+/*app.get('/viber/public', function (req, res) {
 
-    // Multiple messages
-        /*const UrlMessage  = require('viber-bot').Message.Url;
-        bot.postToPublicChat(userProfile, [
-            new TextMessage("Here's the product you've requested:"),
-            new UrlMessage("http://my.ecommerce.site/product1"),
-            new TextMessage("Shipping time: 1-3 business days")
-        ]);*/
-        //contact = Contact(name="Viber user", phone_number="+8801779253539", avatar="http://link.to.avatar")
-        //contact_message = ContactMessage(contact=contact)
         
         var contactName ='Saidur Rahman';
         var contactPhoneNumber='+8801779253539';
@@ -403,7 +394,7 @@ app.get('/viber/public', function (req, res) {
         console.log(`${message.contactName}, ${message.contactPhoneNumber}`);
         bot.getBotProfile().then(response => console.log(`Public Account Named: ${response.name}`));
 
-    });
+    });*/
 
 
 // The user will get those messages on first registration
