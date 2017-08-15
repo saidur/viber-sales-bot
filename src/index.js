@@ -492,6 +492,45 @@ bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
 
 bot.onTextMessage(/./, (message, response) => {
     //checkUrlAvailability(response, message.text);
+    const SAMPLE_KEYBOARD = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 2,
+                "Rows": 2,
+               // "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "IT",
+                "Text":"IT",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 2,
+                "Rows": 2,
+               // "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "Bank",
+                "Text":"Bank",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            }
+        ]
+    };
+    
+    const keyboardMessage = new KeyboardMessage(SAMPLE_KEYBOARD);
+    
     findJobs (response, message.text);
 });
 
