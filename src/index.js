@@ -35,7 +35,7 @@ const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-
 // logger
 var request = require('request');
 var http = require('http');
-var index = require('../routes/index');
+//var index = require('../routes/index');
 
 
 var MongoClient = require('mongodb').MongoClient;
