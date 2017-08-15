@@ -55,11 +55,11 @@ MongoClient.connect(url, function(err, db) {
     { viber_id: '1', mobile: '01673615816',status:'yes'}
    
   ];
-  db.collection("users").insertMany(myobj, function(err, res) {
+  /*db.collection("users").insertMany(myobj, function(err, res) {
     if (err) throw err;
     console.log("Number of records inserted: " + res.insertedCount);
     db.close();
-  });
+  });*/
 });
 
 
@@ -118,11 +118,7 @@ function say(response, message) {
     
     // new KeyboardMessage(SAMPLE_KEYBOARD);
 
-    response.send(
-        new TextMessage(message),
-        new KeyboardMessage(SAMPLE_KEYBOARD)
-    
-    );
+    response.send(new TextMessage(message,SAMPLE_KEYBOARD));
 }
 
 function jobRichMessage(response, message) {
