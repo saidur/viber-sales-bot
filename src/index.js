@@ -78,6 +78,7 @@ function createLogger()
 
 function say(response, message) {
 
+    console.log ('keyboard setup ');
     const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
@@ -114,8 +115,8 @@ function say(response, message) {
             }
         ]
     };
-
-   const kboardMessage=  new KeyboardMessage(SAMPLE_KEYBOARD);
+    
+    const kboardMessage=  new KeyboardMessage(SAMPLE_KEYBOARD);
 
     response.send(new TextMessage(message));
 }
