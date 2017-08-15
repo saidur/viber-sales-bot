@@ -492,6 +492,7 @@ bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
 
 bot.onTextMessage(/./, (message, response) => {
     //checkUrlAvailability(response, message.text);
+    console.log (' on text message....');
     const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
