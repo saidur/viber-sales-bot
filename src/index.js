@@ -1,11 +1,11 @@
 'use strict';
 const express           = require('express');
-//const bodyParser        = require('body-parser');
+const bodyParser        = require('body-parser');
 const app               = express();
 
 // Bring in our dependencies
 //const app               = require('../app');
-const routes            = require('../routes');
+//const routes            = require('../routes');
 //const env               = require('../env.json');
 // remove const
 // viber
@@ -460,11 +460,10 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     const http = require('http');
     const port = process.env.PORT || 5000;
     console.log('Magic happens on port ' + port);
-    //app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
-     app.use("/viber",bot.middleware() );
+    app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
     //app.listen(port);
-    //console.log('Magic happens on port ' + port);
-     http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+    console.log('Magic happens on port ' + port);
+    //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
 } else {
     logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
 }
