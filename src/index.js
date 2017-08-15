@@ -116,9 +116,13 @@ function say(response, message) {
         ]
     };
     
-    const kboardMessage=  new KeyboardMessage(SAMPLE_KEYBOARD);
+    // new KeyboardMessage(SAMPLE_KEYBOARD);
 
-    response.send(new TextMessage(message));
+    response.send(
+        new TextMessage(message),
+        new KeyboardMessage(SAMPLE_KEYBOARD)
+    
+    );
 }
 
 function jobRichMessage(response, message) {
