@@ -204,7 +204,7 @@ function apiSend(botResponse,category) {
                 var jobResponse = JSON.parse(body);
                 logger.debug(jobResponse);
                 var viberButtons =[];
-
+                var jobElements ;
 
 
                 for (var i=0; i<jobResponse.data.length; i++){
@@ -224,7 +224,7 @@ function apiSend(botResponse,category) {
                         
                         
                     };*/
-                    jobElements =  {
+                     jobElements =  {
                             "ActionBody" : item_url,
                             "ActionType" : "open-url",
                             "BgColor": "#85bb65",
