@@ -234,10 +234,10 @@ function apiSend(botResponse,category) {
                             "Columns": 6
                     };
 
-                    viberButtons.push(myelement);
+                    viberButtons.push(jobElements);
 
                 
-                logger.debug("my element" + myelement );
+                logger.debug("my element" + jobElements );
                  //say(botResponse,item_url); 
                 // jobRichMessage(botResponse,item_url);
                 
