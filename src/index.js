@@ -385,7 +385,7 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
 
 //app.use("/viber/webhook", bot.middleware());
 
-/*app.get('/viber/public', function (req, res) {
+app.get('/viber/public', function (req, res) {
 
         
         var contactName ='Saidur Rahman';
@@ -394,7 +394,7 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
         console.log(`${message.contactName}, ${message.contactPhoneNumber}`);
         bot.getBotProfile().then(response => console.log(`Public Account Named: ${response.name}`));
 
-    });*/
+    });
 
 
 // The user will get those messages on first registration
@@ -464,10 +464,11 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     const http = require('http');
     const port = process.env.PORT || 5000;
     console.log('Magic happens on port ' + port);
-    app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
+    //app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
+     app.use("/viber",bot.middleware() );
     //app.listen(port);
-    console.log('Magic happens on port ' + port);
-    //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+    //console.log('Magic happens on port ' + port);
+     http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
 } else {
     logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
 }
