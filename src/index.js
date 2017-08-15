@@ -82,33 +82,16 @@ function say(response, message) {
 
 function jobRichMessage(response, message) {
     
-    console.log ('rich message');
+    console.log ('rich message' + message);
     //response.send(new RichMediaMessage (message));
-    /*const SAMPLE_RICH_MEDIA = {
+    const SAMPLE_RICH_MEDIA = {
         "ButtonsGroupColumns": 6,
         "ButtonsGroupRows": 2,
         "BgColor": "#FFFFFF",
-        "Buttons": [{
-            "ActionBody": "http://www.website.com/go_here",
-            "ActionType": "open-url",
-            "BgMediaType": "picture",
-            "Image": "http://www.images.com/img.jpg",
-            "BgColor": "#000000",
-            "TextOpacity": 60,
-            "Rows": 4,
-            "Columns": 6
-        }, {
-            "ActionBody": "http://www.website.com/go_here",
-            "ActionType": "open-url",
-            "BgColor": "#85bb65",
-            "Text": "Buy",
-            "TextOpacity": 60,
-            "Rows": 1,
-            "Columns": 6
-        }]
-    };*/
+        "Buttons": message
+    };
 
-    const SAMPLE_RICH_MEDIA ={
+    /*const SAMPLE_RICH_MEDIA ={
         "BgColor": "#69C48A",
         "Buttons": [
           {
@@ -129,7 +112,7 @@ function jobRichMessage(response, message) {
             "TextSize": "regular"
           }
         ]
-      }
+      }*/
 
     /*const SAMPLE_KEYBOARD =
     {
@@ -220,7 +203,10 @@ function apiSend(botResponse,category) {
                 logger.debug(body);
                 var jobResponse = JSON.parse(body);
                 logger.debug(jobResponse);
-                
+                var viberButtons =[];
+
+
+
                 for (var i=0; i<jobResponse.data.length; i++){
                     
                     var id = JSON.stringify(jobResponse.data[i].id);
@@ -230,20 +216,35 @@ function apiSend(botResponse,category) {
                     //item_url = 'http://www.chakri.com/job/show/35585/probationary-officer';    
                     console.log("Got a response: ", item_url);
               
-                    var myelement = {
+
+                   /* var myelement = {
                         tracking_data: job_title,
                         type: "url",
                         media: item_url
                         
                         
-                };
+                    };*/
+                    jobElements =  {
+                            "ActionBody" : item_url,
+                            "ActionType" : "open-url",
+                            "BgColor": "#85bb65",
+                            "Text": job_title,
+                            "TextOpacity": 60,
+                            "Rows": 1,
+                            "Columns": 6
+                    };
+
+                    viberButtons.push(myelement);
+
                 
                 logger.debug("my element" + myelement );
                  //say(botResponse,item_url); 
-                 jobRichMessage(botResponse,item_url);
+                // jobRichMessage(botResponse,item_url);
                 
             }  
-           // jobRichMessage(botResponse,item_url);
+
+
+            jobRichMessage(botResponse,viberButtons);
 
              //jobMessage(botResponse, myelement);
             
