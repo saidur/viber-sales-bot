@@ -453,91 +453,16 @@ bot.on(BotEvents.MESSAGE_RECEIVED, (message, response) => {
 
 
 bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
-    const SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 2,
-                "Rows": 2,
-               // "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "IT",
-                "Text":"IT",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 2,
-                "Rows": 2,
-               // "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Bank",
-                "Text":"Bank",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-        ]
-    };
-    
-    const keyboardMessage = new KeyboardMessage(SAMPLE_KEYBOARD);
-     response.send(new TextMessage(`Hi there ${response.userProfile.name}.  welcome to ${bot.name} . Fell free to ask me if you are looking for jobs. Type the category of jobs`),
-     new KeyboardMessage(SAMPLE_KEYBOARD)
-    );
+   
+    var sendMessage = `Hi there ${response.userProfile.name}.  welcome to ${bot.name} . Fell free to ask me if you are looking for jobs. Type the category of jobs`;
+    say(response,sendMessage);
+     //const keyboardMessage = new KeyboardMessage(SAMPLE_KEYBOARD);
+     //response.send(new TextMessage(`Hi there ${response.userProfile.name}.  welcome to ${bot.name} . Fell free to ask me if you are looking for jobs. Type the category of jobs`,) );
 });
 
 bot.onTextMessage(/./, (message, response) => {
     //checkUrlAvailability(response, message.text);
     console.log (' on text message....');
-    const SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 2,
-                "Rows": 2,
-               // "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "IT",
-                "Text":"IT",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 2,
-                "Rows": 2,
-               // "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Bank",
-                "Text":"Bank",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-        ]
-    };
-    
-    const keyboardMessage = new KeyboardMessage(SAMPLE_KEYBOARD);
-    
     findJobs (response, message.text);
 });
 
@@ -548,10 +473,10 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     const http = require('http');
     const port = process.env.PORT || 5000;
     console.log('Magic happens on port ' + port);
-    //app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
+    app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
     //app.listen(port);
     console.log('Magic happens on port ' + port);
-    http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+    //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
 } else {
     logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
 }
