@@ -142,7 +142,7 @@ function jobRichMessage(response, message) {
         }]
     };*/
     //const SAMPLE_KEYBOARD = '';
-    const SAMPLE_KEYBOARD = {
+    /*const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
         "Buttons": [
@@ -155,6 +155,42 @@ function jobRichMessage(response, message) {
                 "BgLoop": true,
                 "ActionType": "reply",
                 "ActionBody": "Yes"
+            }
+        ]
+    };*/
+    const SAMPLE_KEYBOARD = {
+        "Type": "keyboard",
+        "Revision": 1,
+        "Buttons": [
+            {
+                "Columns": 2,
+                "Rows": 2,
+               // "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "IT",
+                "Text":"IT",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 2,
+                "Rows": 2,
+               // "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "Bank",
+                "Text":"Bank",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
             }
         ]
     };
