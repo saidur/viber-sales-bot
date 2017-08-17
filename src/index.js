@@ -4,6 +4,7 @@ const bodyParser        = require('body-parser');
 const app               = express();
 const viberApp          = express();
 
+
 //const natural           = require('natural');
 
 // Bring in our dependencies
@@ -24,8 +25,6 @@ const StickerMessage    = require('viber-bot').Message.Sticker;
 const RichMediaMessage  = require('viber-bot').Message.RichMedia;
 const KeyboardMessage   = require('viber-bot').Message.Keyboard;
 
-
-
 const URL               = require('url');
 const natural           = require('natural');
 const winston           = require('winston');
@@ -36,6 +35,7 @@ const logger            = createLogger();
 const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
 
 const SAMPLE_KEYBOARD = {
+    
     "Type": "keyboard",
     "Revision": 1,
     "Buttons": [
@@ -149,7 +149,7 @@ const SAMPLE_KEYBOARD = {
 
 // logger
 var request = require('request');
-var http = require('http');
+var http    = require('http');
 
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot(logger, {
@@ -157,16 +157,10 @@ const bot = new ViberBot(logger, {
     name: "Chakri",
     avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
 });
+
 var index = require('../routes/index');
-
-
-
-
-
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/viberbot";
-
-
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
@@ -321,7 +315,6 @@ app.post('/joboffer', function (req, res) {
       avatar:response.userProfile.avatar,
       country:response.userProfile.country,
       language:response.userProfile.language
-      
     }  
     
     bot.sendMessage(userProfile, new TextMessage("Thanks for shopping with us"));
@@ -338,9 +331,6 @@ function ValidURL(str) {
     }
 }
 
-
-
-
 if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
     logger.debug('Could not find the Viber Public Account access token key in your environment variable. Please make sure you followed readme guide.');
     return;
@@ -352,13 +342,13 @@ app.get('/index', (req, res) => {
 
 
 app.use("/viber/webhook", bot.middleware());
+
 app.get('/', function (req, res) {
     res.send('Hello World!')
   });
 
-app.get('/viber/public', function (req, res) {
 
-        
+  app.get('/viber/public', function (req, res) {
         var contactName ='Saidur Rahman';
         var contactPhoneNumber='+8801779253539';
         const message = new ContactMessage(contactName, contactPhoneNumber);
@@ -418,9 +408,8 @@ bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
    
     var sendMessage = `Hi there ${response.userProfile.name}.  welcome to ${bot.name} . Fell free to ask me if you are looking for jobs. Type the category of jobs`;
     say(response,sendMessage);
-     //const keyboardMessage = new KeyboardMessage(SAMPLE_KEYBOARD);
-     //response.send(new TextMessage(`Hi there ${response.userProfile.name}.  welcome to ${bot.name} . Fell free to ask me if you are looking for jobs. Type the category of jobs`,) );
-});
+     
+}); 
 
 bot.onTextMessage(/./, (message, response) => {
     //checkUrlAvailability(response, message.text);
@@ -445,13 +434,15 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     //console.log('Magic happens on port ' + port);
     //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
     try { 
-     //bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
+        //bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
+        //app.listen(5000, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+        /*app.listen(5000, function () {
+            console.log('Example app listening on port 3000!')
+        });   */
 
-    
-     app.listen(5000, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
-       /* app.listen(5000, function () {
-    console.log('Example app listening on port 3000!')
-    });*/   
+       
+        http.createServer(bot.middleware(),app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
+
 
     }catch (err) {
          console.log ('error : ' + err);
