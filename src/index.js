@@ -188,7 +188,7 @@ MongoClient.connect(url, function(err, db) {
 });
 
 
-app.use(index, bot.middleware());
+app.use('/index', bot.middleware());
 // log file 
 
 function createLogger() 
