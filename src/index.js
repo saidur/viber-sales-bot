@@ -337,15 +337,14 @@ app.post('/joboffer', function (req, res) {
 });
 
 function ValidURL(str) {
-    var pattern = new RegExp('^(http?:\/\/)?'+ // protocol
-      '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
-      '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
-      '(\#[-a-z\d_]*)?$','i'); // fragment locater
-    if(!pattern.test(str)) {
-          return false;
+    var regex = /(http|https):\/\/(\w+:{0,1}\w*)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%!\-\/]))?/;
+    if(!regex .test(str)) {
+      //alert("Please enter valid URL.");
+      return false;
     } else {
       return true;
     }
+
   }
 
 
