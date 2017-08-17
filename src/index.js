@@ -162,11 +162,6 @@ var index = require('../routes/index');
 
 
 
-viberApp.get('/', function (req, res) {
-    console.log(viberApp.mountpath); // /admin
-    res.send('Viber Homepage');
-  });
-
 
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/viberbot";
@@ -219,9 +214,6 @@ function jobRichMessage(response, message) {
         "Buttons": message
     };
 
-    
-    
-    
     const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
     response.send(message_new);
 
@@ -354,8 +346,15 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
     return;
 }
 
+app.get('/index', (req, res) => {
+    app.status(200).json({ message: 'Connected!' });
+  });
+
 
 app.use("/viber/webhook", bot.middleware());
+app.get('/', function (req, res) {
+    res.send('Hello World!')
+  });
 
 app.get('/viber/public', function (req, res) {
 
@@ -445,8 +444,18 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     //app.listen(port);
     //console.log('Magic happens on port ' + port);
     //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
-    bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
-    app.listen(5000);
+    try { 
+     bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
+
+    
+     app.listen(5000, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+       /* app.listen(5000, function () {
+    console.log('Example app listening on port 3000!')
+    });*/   
+
+    }catch (err) {
+         console.log ('error : ' + err);
+    }
 } else {
     logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
 }
