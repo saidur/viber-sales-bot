@@ -328,12 +328,18 @@ function apiSend(botResponse,category) {
                 // jobRichMessage(botResponse,item_url);
                 
             }  
-            
+
+            logger.debug("botResponse" + botResponse.length);
             if ( botResponse.length > 0 )
                { 
 
                     jobRichMessage(botResponse,viberButtons);
+               }else {
+
+                  say(botResponse,' Sorry Nothing match jobs not found . Please try with another category');
+
                }
+
 
              //jobMessage(botResponse, myelement);
             
