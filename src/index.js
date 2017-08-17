@@ -157,8 +157,10 @@ const bot = new ViberBot(logger, {
     name: "Chakri",
     avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
 });
-
 var index = require('../routes/index');
+
+
+
 
 viberApp.get('/', function (req, res) {
     console.log(viberApp.mountpath); // /admin
@@ -212,7 +214,7 @@ function jobRichMessage(response, message) {
     //response.send(new RichMediaMessage (message));
     const SAMPLE_RICH_MEDIA = {
         "ButtonsGroupColumns": 6,
-        "ButtonsGroupRows": 3,
+        "ButtonsGroupRows": 2,
         "BgColor": "#FFFFFF",
         "Buttons": message
     };
