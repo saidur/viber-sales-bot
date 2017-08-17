@@ -211,8 +211,8 @@ function jobRichMessage(response, message) {
     console.log ('rich message' + message);
     //response.send(new RichMediaMessage (message));
     const SAMPLE_RICH_MEDIA = {
-        "ButtonsGroupColumns": 8,
-        "ButtonsGroupRows": 2,
+        "ButtonsGroupColumns": 6,
+        "ButtonsGroupRows": 3,
         "BgColor": "#FFFFFF",
         "Buttons": message
     };
