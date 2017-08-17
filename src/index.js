@@ -4,7 +4,7 @@ const bodyParser        = require('body-parser');
 const app               = express();
 const viberApp          = express();
 
-const natural           = require('natural');
+//const natural           = require('natural');
 
 // Bring in our dependencies
 //const app               = require('../app');
