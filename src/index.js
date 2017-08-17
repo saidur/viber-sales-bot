@@ -427,7 +427,8 @@ bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
 bot.onTextMessage(/./, (message, response) => {
     //checkUrlAvailability(response, message.text);
     console.log (' on text message....'+message.text);
-    ValidURL(message.text);
+    var isUrl = ValidURL(message.text);
+    console.log ('url check '+ isUrl);
     findJobs (response, message.text);
 });
 
