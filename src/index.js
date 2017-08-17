@@ -40,8 +40,8 @@ const SAMPLE_KEYBOARD = {
     "Revision": 1,
     "Buttons": [
         {
-            "Columns": 1,
-            "Rows": 1,
+            "Columns": 2,
+            "Rows": 2,
             "BgColor": "#e6f5ff",
            // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
            // "BgMediaType": "picture",
@@ -55,8 +55,8 @@ const SAMPLE_KEYBOARD = {
             "TextSize": "regular"
         },
         {
-            "Columns": 1,
-            "Rows": 1,
+            "Columns": 2,
+            "Rows": 2,
             "BgColor": "#e6f5ff",
            // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
            // "BgMediaType": "picture",
@@ -70,8 +70,8 @@ const SAMPLE_KEYBOARD = {
             "TextSize": "regular"
         },
         {
-            "Columns": 1,
-            "Rows": 1,
+            "Columns": 2,
+            "Rows": 2,
             "BgColor": "#e6f5ff",
            // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
            // "BgMediaType": "picture",
@@ -85,8 +85,8 @@ const SAMPLE_KEYBOARD = {
             "TextSize": "regular"
         },
         {
-            "Columns": 1,
-            "Rows": 1,
+            "Columns": 2,
+            "Rows": 2,
             "BgColor": "#e6f5ff",
            // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
            // "BgMediaType": "picture",
@@ -100,8 +100,8 @@ const SAMPLE_KEYBOARD = {
             "TextSize": "regular"
         },
         {
-            "Columns": 1,
-            "Rows": 1,
+            "Columns": 2,
+            "Rows": 2,
             "BgColor": "#e6f5ff",
            // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
            // "BgMediaType": "picture",
@@ -115,8 +115,8 @@ const SAMPLE_KEYBOARD = {
             "TextSize": "regular"
         },
         {
-            "Columns": 1,
-            "Rows": 1,
+            "Columns":2,
+            "Rows": 2,
             "BgColor": "#e6f5ff",
            // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
            // "BgMediaType": "picture",
@@ -130,8 +130,8 @@ const SAMPLE_KEYBOARD = {
             "TextSize": "regular"
         },
         {
-            "Columns": 1,
-            "Rows": 1,
+            "Columns": 2,
+            "Rows": 2,
             "BgColor": "#e6f5ff",
            // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
            // "BgMediaType": "picture",
@@ -157,10 +157,8 @@ const bot = new ViberBot(logger, {
     name: "Chakri",
     avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
 });
+
 var index = require('../routes/index');
-
-
-
 
 viberApp.get('/', function (req, res) {
     console.log(viberApp.mountpath); // /admin
@@ -213,7 +211,7 @@ function jobRichMessage(response, message) {
     console.log ('rich message' + message);
     //response.send(new RichMediaMessage (message));
     const SAMPLE_RICH_MEDIA = {
-        "ButtonsGroupColumns": 6,
+        "ButtonsGroupColumns": 8,
         "ButtonsGroupRows": 2,
         "BgColor": "#FFFFFF",
         "Buttons": message
@@ -321,7 +319,7 @@ function findJobs (botResponse,jobCategory)
 */
 
 app.post('/joboffer', function (req, res) {
-  //res.send('Hello from A!')
+  
   var response = 
     { 
       id: response.userProfile.id, 
@@ -344,8 +342,7 @@ function ValidURL(str) {
     } else {
       return true;
     }
-
-  }
+}
 
 
 
@@ -356,7 +353,7 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
 }
 
 
-//app.use("/viber/webhook", bot.middleware());
+app.use("/viber/webhook", bot.middleware());
 
 app.get('/viber/public', function (req, res) {
 
