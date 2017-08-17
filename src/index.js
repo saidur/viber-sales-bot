@@ -2,7 +2,9 @@
 const express           = require('express');
 const bodyParser        = require('body-parser');
 const app               = express();
-const viberApp               = express();
+const viberApp          = express();
+
+const natural           = require('natural');
 
 // Bring in our dependencies
 //const app               = require('../app');
@@ -202,45 +204,7 @@ function createLogger()
 function say(response, message) {
 
     console.log ('keyboard setup ');
-    /*const SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                //"BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-                //"BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "IT",
-                "Text":"IT",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 2,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                //"BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-                //"BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Bank",
-                "Text":"Bank",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-        ]
-    };*/
-    
-    // new KeyboardMessage(SAMPLE_KEYBOARD);
-
+   
     response.send(new TextMessage(message,SAMPLE_KEYBOARD));
 }
 
@@ -278,14 +242,6 @@ function apiSend(botResponse,category) {
     
     var url = queryUrl;
     
-    var myTemplate = {
-                        "tracking_data": "tracking data",
-                        "type": "url",
-                        "media": "http://www.chakri.com"
-                    };
-    
-    
-
     http.get(url, function(res){
             
             var body = '';
@@ -301,14 +257,12 @@ function apiSend(botResponse,category) {
                 var viberButtons =[];
                 var jobElements ;
 
-
                 for (var i=0; i<jobResponse.data.length; i++){
                     
                     var id = JSON.stringify(jobResponse.data[i].id);
                     var job_title = JSON.stringify(jobResponse.data[i].job_title);
                     var category = JSON.stringify(jobResponse.data[i].category);
                     var item_url = JSON.stringify(jobResponse.data[i].item_url);
-                    //item_url = 'http://www.chakri.com/job/show/35585/probationary-officer';    
                     console.log("Got a response: ", item_url);
                      jobElements =  {
                             "ActionBody" : item_url,
@@ -324,9 +278,6 @@ function apiSend(botResponse,category) {
 
                 
                 logger.debug("my element" + jobElements );
-                 //say(botResponse,item_url); 
-                // jobRichMessage(botResponse,item_url);
-                
             }  
 
             logger.debug("botResponse" + botResponse.length);
@@ -335,8 +286,7 @@ function apiSend(botResponse,category) {
 
                     jobRichMessage(botResponse,viberButtons);
                }else {
-
-                  say(botResponse,' Sorry Nothing match jobs not found . Please try with another category');
+                      say(botResponse,' Sorry Nothing match jobs not found . Please try with another category');
 
                }
 
@@ -365,11 +315,11 @@ function findJobs (botResponse,jobCategory)
     
 }
 
-
 /*app.get('/',    function (req, res) {
   res.send('Hello from A!')
 });
 */
+
 app.post('/joboffer', function (req, res) {
   //res.send('Hello from A!')
   var response = 
@@ -386,6 +336,18 @@ app.post('/joboffer', function (req, res) {
 
 });
 
+function ValidURL(str) {
+    var pattern = new RegExp('^(http?:\/\/)?'+ // protocol
+      '((([a-z\d]([a-z\d-]*[a-z\d])*)\.)+[a-z]{2,}|'+ // domain name
+      '(\?[;&a-z\d%_.~+=-]*)?'+ // query string
+      '(\#[-a-z\d_]*)?$','i'); // fragment locater
+    if(!pattern.test(str)) {
+          return false;
+    } else {
+      return true;
+    }
+  }
+
 
 
 
@@ -393,8 +355,6 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
     logger.debug('Could not find the Viber Public Account access token key in your environment variable. Please make sure you followed readme guide.');
     return;
 }
-
-
 
 
 //app.use("/viber/webhook", bot.middleware());
@@ -467,7 +427,8 @@ bot.onTextMessage(/^hi|hello|Hi|Hello$/i, (message, response) => {
 
 bot.onTextMessage(/./, (message, response) => {
     //checkUrlAvailability(response, message.text);
-    console.log (' on text message....');
+    console.log (' on text message....'+message.text);
+    ValidURL(message.text);
     findJobs (response, message.text);
 });
 
