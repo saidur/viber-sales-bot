@@ -33,6 +33,118 @@ const stemmer           = natural.PorterStemmer;
 const logger            = createLogger();
 const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
 
+const SAMPLE_KEYBOARD = {
+    "Type": "keyboard",
+    "Revision": 1,
+    "Buttons": [
+        {
+            "Columns": 1,
+            "Rows": 1,
+            "BgColor": "#e6f5ff",
+           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+           // "BgMediaType": "picture",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "Accounting",
+            "Text":"Accounting / Finance",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 1,
+            "Rows": 1,
+            "BgColor": "#e6f5ff",
+           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+           // "BgMediaType": "picture",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "Agro",
+            "Text":"Agro (Plant / Animal / Fisheries)",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 1,
+            "Rows": 1,
+            "BgColor": "#e6f5ff",
+           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+           // "BgMediaType": "picture",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "Bank",
+            "Text":"Bank",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 1,
+            "Rows": 1,
+            "BgColor": "#e6f5ff",
+           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+           // "BgMediaType": "picture",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "Beauty Care",
+            "Text":"Beauty Care",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 1,
+            "Rows": 1,
+            "BgColor": "#e6f5ff",
+           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+           // "BgMediaType": "picture",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "Commercial",
+            "Text":"Commercial",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 1,
+            "Rows": 1,
+            "BgColor": "#e6f5ff",
+           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+           // "BgMediaType": "picture",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "Customer Support",
+            "Text":"Customer Support",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        },
+        {
+            "Columns": 1,
+            "Rows": 1,
+            "BgColor": "#e6f5ff",
+           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+           // "BgMediaType": "picture",
+            "BgLoop": true,
+            "ActionType": "reply",
+            "ActionBody": "Data Entry",
+            "Text":"Data Entry",
+            "TextVAlign": "middle",
+            "TextHAlign": "center",
+            "TextOpacity": 60,
+            "TextSize": "regular"
+        }
+    ]
+};
+
 // logger
 var request = require('request');
 var http = require('http');
@@ -90,7 +202,7 @@ function createLogger()
 function say(response, message) {
 
     console.log ('keyboard setup ');
-    const SAMPLE_KEYBOARD = {
+    /*const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
         "Buttons": [
@@ -125,7 +237,7 @@ function say(response, message) {
                 "TextSize": "regular"
             }
         ]
-    };
+    };*/
     
     // new KeyboardMessage(SAMPLE_KEYBOARD);
 
@@ -143,117 +255,7 @@ function jobRichMessage(response, message) {
         "Buttons": message
     };
 
-    const SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 1,
-                "Rows": 1,
-                "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Accounting",
-                "Text":"Accounting / Finance",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 1,
-                "Rows": 1,
-                "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Agro",
-                "Text":"Agro (Plant / Animal / Fisheries)",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 1,
-                "Rows": 1,
-                "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Bank",
-                "Text":"Bank",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 1,
-                "Rows": 1,
-                "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Beauty Care",
-                "Text":"Beauty Care",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 1,
-                "Rows": 1,
-                "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Commercial",
-                "Text":"Commercial",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 1,
-                "Rows": 1,
-                "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Customer Support",
-                "Text":"Customer Support",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            },
-            {
-                "Columns": 1,
-                "Rows": 1,
-                "BgColor": "#e6f5ff",
-               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-               // "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Data Entry",
-                "Text":"Data Entry",
-                "TextVAlign": "middle",
-                "TextHAlign": "center",
-                "TextOpacity": 60,
-                "TextSize": "regular"
-            }
-        ]
-    };
+    
     
     
     const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
