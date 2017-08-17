@@ -2,6 +2,7 @@
 const express           = require('express');
 const bodyParser        = require('body-parser');
 const app               = express();
+const viberApp               = express();
 
 // Bring in our dependencies
 //const app               = require('../app');
@@ -35,11 +36,6 @@ const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-
 // logger
 var request = require('request');
 var http = require('http');
-//var index = require('../routes/index');
-
-
-var MongoClient = require('mongodb').MongoClient;
-var url = "mongodb://localhost:27017/viberbot";
 
 // Creating the bot with access token, name and avatar
 const bot = new ViberBot(logger, {
@@ -47,6 +43,21 @@ const bot = new ViberBot(logger, {
     name: "Chakri",
     avatar: "https://raw.githubusercontent.com/devrelv/drop/master/151-icon.png" // Just a placeholder avatar to display the user
 });
+var index = require('../routes/index');
+
+
+
+
+viberApp.get('/', function (req, res) {
+    console.log(viberApp.mountpath); // /admin
+    res.send('Viber Homepage');
+  });
+
+
+var MongoClient = require('mongodb').MongoClient;
+var url = "mongodb://localhost:27017/viberbot";
+
+
 
 MongoClient.connect(url, function(err, db) {
   if (err) throw err;
@@ -132,95 +143,43 @@ function jobRichMessage(response, message) {
         "Buttons": message
     };
 
-    /*const SAMPLE_RICH_MEDIA ={
-        "BgColor": "#69C48A",
-        "Buttons": [
-          {
-            "Columns": 6,
-            "Rows": 1,
-            "BgColor": "#454545",
-            "BgMediaType": "gif",
-            "BgMedia": "http://www.url.by/test.gif",
-            "BgLoop": true,
-            "ActionType": "open-url",
-            "Silent": true,
-            "ActionBody": "www.tut.by",
-            "Image": "www.tut.by/img.jpg",
-            "TextVAlign": "middle",
-            "TextHAlign": "left",
-            "Text": "<b>example</b> button",
-            "TextOpacity": 10,
-            "TextSize": "regular"
-          }
-        ]
-      }*/
-
-    /*const SAMPLE_KEYBOARD =
-    {
-        "Type": "keyboard",
-        "Buttons": [{
-            "Columns": 3,
-            "Rows": 2,
-            "Text": "<font color=\"#494E67\">Smoking</font><br><br>",
-            "TextSize": "medium",
-            "TextHAlign": "center",
-            "TextVAlign": "bottom",
-            "ActionType": "reply",
-            "ActionBody": "Smoking",
-            "BgColor": "#f7bb3f",
-            "Image": "https: //s12.postimg.org/ti4alty19/smoke.png"
-        }, {
-            "Columns": 3,
-            "Rows": 2,
-            "Text": "<font color=\"#494E67\">Non Smoking</font><br><br>",
-            "TextSize": "medium",
-            "TextHAlign": "center",
-            "TextVAlign": "bottom",
-            "ActionType": "reply",
-            "ActionBody": "Non smoking",
-            "BgColor": "# f6f7f9",
-            "Image": "https: //s14.postimg.org/us7t38az5/Nonsmoke.png"
-        }]
-    };*/
-    //const SAMPLE_KEYBOARD = '';
-    /*const SAMPLE_KEYBOARD = {
-        "Type": "keyboard",
-        "Revision": 1,
-        "Buttons": [
-            {
-                "Columns": 3,
-                "Rows": 2,
-                "BgColor": "#e6f5ff",
-                "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-                "BgMediaType": "picture",
-                "BgLoop": true,
-                "ActionType": "reply",
-                "ActionBody": "Yes"
-            }
-        ]
-    };*/
     const SAMPLE_KEYBOARD = {
         "Type": "keyboard",
         "Revision": 1,
         "Buttons": [
             {
-                "Columns": 2,
-                "Rows": 2,
+                "Columns": 1,
+                "Rows": 1,
                 "BgColor": "#e6f5ff",
                // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
                // "BgMediaType": "picture",
                 "BgLoop": true,
                 "ActionType": "reply",
-                "ActionBody": "IT",
-                "Text":"IT",
+                "ActionBody": "Accounting",
+                "Text":"Accounting / Finance",
                 "TextVAlign": "middle",
                 "TextHAlign": "center",
                 "TextOpacity": 60,
                 "TextSize": "regular"
             },
             {
-                "Columns": 2,
-                "Rows": 2,
+                "Columns": 1,
+                "Rows": 1,
+                "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "Agro",
+                "Text":"Agro (Plant / Animal / Fisheries)",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 1,
+                "Rows": 1,
                 "BgColor": "#e6f5ff",
                // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
                // "BgMediaType": "picture",
@@ -232,20 +191,77 @@ function jobRichMessage(response, message) {
                 "TextHAlign": "center",
                 "TextOpacity": 60,
                 "TextSize": "regular"
+            },
+            {
+                "Columns": 1,
+                "Rows": 1,
+                "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "Beauty Care",
+                "Text":"Beauty Care",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 1,
+                "Rows": 1,
+                "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "Commercial",
+                "Text":"Commercial",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 1,
+                "Rows": 1,
+                "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "Customer Support",
+                "Text":"Customer Support",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
+            },
+            {
+                "Columns": 1,
+                "Rows": 1,
+                "BgColor": "#e6f5ff",
+               // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
+               // "BgMediaType": "picture",
+                "BgLoop": true,
+                "ActionType": "reply",
+                "ActionBody": "Data Entry",
+                "Text":"Data Entry",
+                "TextVAlign": "middle",
+                "TextHAlign": "center",
+                "TextOpacity": 60,
+                "TextSize": "regular"
             }
         ]
     };
     
-    //const message = new KeyboardMessage(SAMPLE_KEYBOARD, [optionalTrackingData]);
-    //const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA);
+    
     const message_new = new RichMediaMessage(SAMPLE_RICH_MEDIA,SAMPLE_KEYBOARD);
     response.send(message_new);
 
 }
 
 function jobMessage (response,message) {
-    
-    
     
     response.send(new  UrlMessage(message));
 }
@@ -292,15 +308,6 @@ function apiSend(botResponse,category) {
                     var item_url = JSON.stringify(jobResponse.data[i].item_url);
                     //item_url = 'http://www.chakri.com/job/show/35585/probationary-officer';    
                     console.log("Got a response: ", item_url);
-              
-
-                   /* var myelement = {
-                        tracking_data: job_title,
-                        type: "url",
-                        media: item_url
-                        
-                        
-                    };*/
                      jobElements =  {
                             "ActionBody" : item_url,
                             "ActionType" : "open-url",
@@ -319,9 +326,12 @@ function apiSend(botResponse,category) {
                 // jobRichMessage(botResponse,item_url);
                 
             }  
+            
+            if ( botResponse.length > 0 )
+               { 
 
-
-            jobRichMessage(botResponse,viberButtons);
+                    jobRichMessage(botResponse,viberButtons);
+               }
 
              //jobMessage(botResponse, myelement);
             
@@ -348,10 +358,10 @@ function findJobs (botResponse,jobCategory)
 }
 
 
-app.get('/',    function (req, res) {
+/*app.get('/',    function (req, res) {
   res.send('Hello from A!')
 });
-
+*/
 app.post('/joboffer', function (req, res) {
   //res.send('Hello from A!')
   var response = 
