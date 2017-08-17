@@ -429,7 +429,10 @@ bot.onTextMessage(/./, (message, response) => {
     console.log (' on text message....'+message.text);
     var isUrl = ValidURL(message.text);
     console.log ('url check '+ isUrl);
-    findJobs (response, message.text);
+    if (isUrl !=true)
+        {
+            findJobs (response, message.text);
+        }    
 });
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
