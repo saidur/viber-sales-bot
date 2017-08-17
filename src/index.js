@@ -330,7 +330,7 @@ function apiSend(botResponse,category) {
             }  
 
             logger.debug("botResponse" + botResponse.length);
-            if ( botResponse.length > 0 )
+            if ( viberButtons.length > 0 )
                { 
 
                     jobRichMessage(botResponse,viberButtons);
