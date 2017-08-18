@@ -423,14 +423,15 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
 }
 
 app.get('/index', (req, res) => {
-    app.status(200).json({ message: 'Connected!' });
+    //app.status(200).json({ message: 'Connected!' });
+    res.send('Hello World!');
   });
 
 
 app.use("/viber/webhook", bot.middleware());
 
 app.get('/', function (req, res) {
-    res.send('Hello World!')
+    res.send('Hello World!');
   });
 
 
@@ -527,8 +528,8 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
         });   */
 
        
-        http.createServer(bot.middleware(),app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
-
+       // http.createServer(bot.middleware(),app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
+       app.listen(5000);
 
     }catch (err) {
          console.log ('error : ' + err);
