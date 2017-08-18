@@ -530,8 +530,8 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
        
        //http.createServer(bot.middleware(),app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
        //app.listen(5000);
-       var httpServer= http.createServer(app);
-       httpServer.listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
+      // var httpServer= http.createServer(app);
+       app.listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
        //bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
 
     }catch (err) {
