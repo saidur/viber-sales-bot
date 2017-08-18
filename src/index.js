@@ -521,20 +521,20 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     //console.log('Magic happens on port ' + port);
     //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
     try { 
-        //bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
+        bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
         //app.listen(5000, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
         /*app.listen(5000, function () {
             console.log('Example app listening on port 3000!')
         });   */
 
         //var httpServer= http.createServer(app);
-       // app.listen(5000);
+        app.listen(5000);
       // http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
        //app.listen(5000);
       // var httpServer= http.createServer(app);
       // app.listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
        //bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
-       http.createServer(app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
+      // http.createServer(app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
     }catch (err) {
          console.log ('error : ' + err);
     }
