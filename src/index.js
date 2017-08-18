@@ -263,7 +263,7 @@ MongoClient.connect(url, function(err, db) {
 });
 
 
-app.use('/index', bot.middleware());
+//app.use('/index', bot.middleware());
 // log file 
 
 function createLogger() 
@@ -422,7 +422,7 @@ if (!VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY) {
     return;
 }
 
-app.get('/index', (req, res) => {
+app.get('/test', (req, res) => {
     //app.status(200).json({ message: 'Connected!' });
     res.send('Hello World!');
   });
@@ -530,7 +530,7 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
        
        //http.createServer(bot.middleware(),app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
        //app.listen(5000);
-       var httpServer= http.createServer(bot.middleware(),app);
+       var httpServer= http.createServer(app);
        httpServer.listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
        //bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
 
