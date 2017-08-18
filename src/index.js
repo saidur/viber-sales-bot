@@ -530,6 +530,7 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
        
        // http.createServer(bot.middleware(),app).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
        app.listen(5000);
+       bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
 
     }catch (err) {
          console.log ('error : ' + err);
