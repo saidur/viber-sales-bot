@@ -4,13 +4,8 @@ const bodyParser        = require('body-parser');
 const app               = express();
 const viberApp          = express();
 
-
 //const natural           = require('natural');
 
-// Bring in our dependencies
-//const app               = require('../app');
-//const routes            = require('../routes');
-//const env               = require('../env.json');
 // remove const
 // viber
 const ViberBot          = require('viber-bot').Bot;
@@ -33,134 +28,6 @@ const toYAML            = require('winston-console-formatter');
 const stemmer           = natural.PorterStemmer;
 const logger            = createLogger();
 const VIBER_PUBLIC_ACCOUNT_ACCESS_TOKEN_KEY ="464b4b09d9312d68-f40d732c7a251e8c-223ffae9b84c06fe";
-
-/*const SAMPLE_KEYBOARD = {
-    
-    "Type": "keyboard",
-    "Revision": 1,
-    "Buttons": [
-        {
-            "Columns": 2,
-            "Rows": 2,
-            "BgColor": "#e6f5ff",
-           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-           // "BgMediaType": "picture",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "Accounting",
-            "Text":"Accounting / Finance",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular",
-            "BgColor": "#f7bb3f",
-            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
-        },
-        {
-            "Columns": 2,
-            "Rows": 2,
-            "BgColor": "#e6f5ff",
-           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-           // "BgMediaType": "picture",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "Agro",
-            "Text":"Agro (Plant / Animal / Fisheries)",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular",
-            //"BgColor": "#f7bb3f",
-            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
-        },
-        {
-            "Columns": 2,
-            "Rows": 2,
-            "BgColor": "#e6f5ff",
-           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-           // "BgMediaType": "picture",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "Bank",
-            "Text":"Bank",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular",
-            //"BgColor": "#f7bb3f",
-            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
-        },
-        {
-            "Columns": 2,
-            "Rows": 2,
-            "BgColor": "#e6f5ff",
-           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-           // "BgMediaType": "picture",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "Beauty Care",
-            "Text":"Beauty Care",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular",
-            //"BgColor": "#f7bb3f",
-            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
-        },
-        {
-            "Columns": 2,
-            "Rows": 2,
-            "BgColor": "#e6f5ff",
-           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-           // "BgMediaType": "picture",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "Commercial",
-            "Text":"Commercial",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular",
-            "BgColor": "#f7bb3f",
-            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
-        },
-        {
-            "Columns":2,
-            "Rows": 2,
-            "BgColor": "#e6f5ff",
-           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-           // "BgMediaType": "picture",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "Customer Support",
-            "Text":"Customer Support",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular",
-            "BgColor": "#f7bb3f",
-            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
-        },
-        {
-            "Columns": 2,
-            "Rows": 2,
-            "BgColor": "#e6f5ff",
-           // "BgMedia": "http://www.jqueryscript.net/images/Simplest-Responsive-jQuery-Image-Lightbox-Plugin-simple-lightbox.jpg",
-           // "BgMediaType": "picture",
-            "BgLoop": true,
-            "ActionType": "reply",
-            "ActionBody": "Data Entry",
-            "Text":"Data Entry",
-            "TextVAlign": "middle",
-            "TextHAlign": "center",
-            "TextOpacity": 60,
-            "TextSize": "regular",
-            "BgColor": "#f7bb3f",
-            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
-        }
-    ]
-};*/
-
 
 const SAMPLE_KEYBOARD = {
 	"Type": "keyboard",
