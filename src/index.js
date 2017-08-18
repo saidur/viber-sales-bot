@@ -52,7 +52,9 @@ const SAMPLE_KEYBOARD = {
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
-            "TextSize": "regular"
+            "TextSize": "regular",
+            "BgColor": "#f7bb3f",
+            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
         },
         {
             "Columns": 2,
@@ -67,7 +69,9 @@ const SAMPLE_KEYBOARD = {
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
-            "TextSize": "regular"
+            "TextSize": "regular",
+            //"BgColor": "#f7bb3f",
+            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
         },
         {
             "Columns": 2,
@@ -82,7 +86,9 @@ const SAMPLE_KEYBOARD = {
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
-            "TextSize": "regular"
+            "TextSize": "regular",
+            //"BgColor": "#f7bb3f",
+            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
         },
         {
             "Columns": 2,
@@ -97,7 +103,9 @@ const SAMPLE_KEYBOARD = {
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
-            "TextSize": "regular"
+            "TextSize": "regular",
+            //"BgColor": "#f7bb3f",
+            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
         },
         {
             "Columns": 2,
@@ -112,7 +120,9 @@ const SAMPLE_KEYBOARD = {
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
-            "TextSize": "regular"
+            "TextSize": "regular",
+            "BgColor": "#f7bb3f",
+            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
         },
         {
             "Columns":2,
@@ -127,7 +137,9 @@ const SAMPLE_KEYBOARD = {
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
-            "TextSize": "regular"
+            "TextSize": "regular",
+            "BgColor": "#f7bb3f",
+            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
         },
         {
             "Columns": 2,
@@ -142,7 +154,21 @@ const SAMPLE_KEYBOARD = {
             "TextVAlign": "middle",
             "TextHAlign": "center",
             "TextOpacity": 60,
-            "TextSize": "regular"
+            "TextSize": "regular",
+            "BgColor": "#f7bb3f",
+            "Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
+        },
+        , {
+            "Columns": 2,
+            "Rows": 2,
+            "Text": "<br><font color=\"#494E67\"><b>MORE</b></font>",
+            "TextSize": "large",
+            "TextHAlign": "center",
+            "TextVAlign": "middle",
+            "ActionType": "reply",
+            "ActionBody": "More",
+            "BgColor": "#a8aaba",
+            "Image": "https://s18.postimg.org/ylmyu98et/more_Options.png"
         }
     ]
 };
