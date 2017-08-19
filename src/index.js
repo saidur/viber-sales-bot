@@ -303,11 +303,20 @@ app.get('/', function (req, res) {
 
 
   app.get('/viber/public', function (req, res) {
+       
         var contactName ='Saidur Rahman';
         var contactPhoneNumber='+8801779253539';
         const message = new ContactMessage(contactName, contactPhoneNumber);
         console.log(`${message.contactName}, ${message.contactPhoneNumber}`);
-        bot.getBotProfile().then(response => console.log(`Public Account Named: ${response.name}`));
+       // bot.getBotProfile().then(response => console.log(`Public Account Named: ${response.name}`));
+       var userProfile = 
+       { 
+         id:'KCV/+VAfKFzPnjLcII8Ppg==', 
+         name: 'Chakri.com'
+         
+       } 
+       
+       bot.postToPublicChat(userProfile, new TextMessage("Thanks for shopping with us"));
 
     });
 
