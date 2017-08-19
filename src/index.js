@@ -412,7 +412,7 @@ if (process.env.NOW_URL || process.env.HEROKU_URL ) {
         const http = require('http');
         const port = process.env.PORT || 5000;
         try{
-            http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(WEB_URL));
+            app.use(bot.middleware()).listen(port, () => bot.setWebhook(WEB_URL));
         }catch(error){
             console.log('Can not connect to ngrok server. Is it running?');
             console.error(error);
