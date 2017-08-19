@@ -378,9 +378,9 @@ bot.onTextMessage(/./, (message, response) => {
 
 const WEB_URL='https://botmela.samuraigeeks.net/';
     
-if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
+if (process.env.NOW_URL || process.env.HEROKU_URL ) {
     
-    const http = require('http');
+    //const http = require('http');
     const port = process.env.PORT || 5000;
     //console.log('Magic happens on port ' + port);
     //app.use("/viber/webhook", bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));;
@@ -388,7 +388,7 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
     //console.log('Magic happens on port ' + port);
     //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
     try { 
-        bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
+        //bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL);
         //app.listen(5000, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));
         /*app.listen(5000, function () {
             console.log('Example app listening on port 3000!')
@@ -406,5 +406,29 @@ if (process.env.NOW_URL || process.env.HEROKU_URL || WEB_URL) {
          console.log ('error : ' + err);
     }
 } else {
-    logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
+    //logger.debug('Could not find the now.sh/Heroku environment variables. Please make sure you followed readme guide.');
+  
+        logger.debug('Could not find the now.sh/Heroku environment variables. Trying to use the local ngrok server.');
+        const http = require('http');
+        const port = process.env.PORT || 5000;
+        try{
+            http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(WEB_URL));
+        }catch(error){
+            console.log('Can not connect to ngrok server. Is it running?');
+            console.error(error);
+            process.exit(1);
+        };
+        /*return ngrok.getPublicUrl().then(publicUrl => {
+            const http = require('http');
+            const port = process.env.PORT || 5000;
+    
+            http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(publicUrl));
+    
+        }).catch(error => {
+            console.log('Can not connect to ngrok server. Is it running?');
+            console.error(error);
+            process.exit(1);
+        });*/
+    
+
 }
