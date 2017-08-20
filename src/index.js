@@ -127,6 +127,14 @@ MongoClient.connect(url, function(err, db) {
     console.log("Number of records inserted: " + res.insertedCount);
     db.close();
   });*/
+
+  db.collection("users").find({}).toArray(function(err, result) {
+    if (err) throw err;
+    console.log(result);
+    db.close();
+  });
+
+
 });
 
 
@@ -405,7 +413,7 @@ if (process.env.NOW_URL || process.env.HEROKU_URL ) {
         });   */
 
         //var httpServer= http.createServer(app);
-        app.listen(5000);
+        //app.listen(5000);
       //http.createServer(bot.middleware()).listen(port, () => bot.setWebhook(process.env.NOW_URL || process.env.HEROKU_URL||WEB_URL));    
        //app.listen(5000);
       // var httpServer= http.createServer(app);
@@ -422,7 +430,10 @@ if (process.env.NOW_URL || process.env.HEROKU_URL ) {
         const http = require('http');
         const port = process.env.PORT || 5000;
         try{
-            app.use(bot.middleware()).listen(port, () => bot.setWebhook(WEB_URL));
+            //app.use(bot.middleware()).listen(port, () => bot.setWebhook(WEB_URL));
+            app.listen(5000);
+            bot.setWebhook(WEB_URL);
+        
         }catch(error){
             console.log('Can not connect to ngrok server. Is it running?');
             console.error(error);
