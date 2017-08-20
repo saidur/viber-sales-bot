@@ -326,12 +326,19 @@ app.get('/', function (req, res) {
         const message = new ContactMessage(contactName, contactPhoneNumber);
         console.log(`${message.contactName}, ${message.contactPhoneNumber}`);
         bot.getBotProfile().then(response => console.log(`Public Account Named: ${response.name}`));
-       var userProfile = 
+       /*var userProfile = 
        { 
          id:'KCV/+VAfKFzPnjLcII8Ppg==', 
          name: 'Chakri.com'
          
-       };
+       };*/
+       var userProfile ={ 
+        viber_id: 'rISNnSOfFM750aEBkjId0g==',
+        name: 'Tanveer',
+        avatar: null,
+        country: 'BD',
+        language: 'en',
+        status: 'yes' };
        
        bot.postToPublicChat(userProfile, new TextMessage("Thanks for shopping with us"));
        res.status(200).json({ message: 'Connected!' });
@@ -441,8 +448,10 @@ if (process.env.NOW_URL || process.env.HEROKU_URL ) {
         const port = process.env.PORT || 5000;
         try{
             //app.use(bot.middleware()).listen(port, () => bot.setWebhook(WEB_URL));
-            app.listen(5000);
-            bot.setWebhook(WEB_URL);
+            //app.listen(5000);
+           // bot.setWebhook(WEB_URL);
+           //bot.setWebhook(WEB_URL).then(() => yourBot.doSomething()).catch(err => console.log(err));
+            http.createServer(app).listen(port, () => bot.setWebhook(WEB_URL));
         
         }catch(error){
             console.log('Can not connect to ngrok server. Is it running?');
