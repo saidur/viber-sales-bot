@@ -267,7 +267,7 @@ function findJobs (botResponse,jobCategory)
 });
 */
 
-app.post('/joboffer', function (req, res) {
+app.get('/joboffer', function (req, res) {
   
   var response = 
     { 
@@ -277,6 +277,15 @@ app.post('/joboffer', function (req, res) {
       country:response.userProfile.country,
       language:response.userProfile.language
     }  
+
+    var userProfile ={ 
+        viber_id: 'rISNnSOfFM750aEBkjId0g==',
+        name: 'Tanveer',
+        avatar: null,
+        country: 'BD',
+        language: 'en',
+        status: 'yes' };
+    
     
     bot.sendMessage(userProfile, new TextMessage("Thanks for shopping with us"));
 
@@ -349,6 +358,7 @@ bot.onSubscribe(response => {
     }
    
   ];
+  
   db.collection("users").insertMany(myobj, function(err, res) {
     if (err) throw err;
     console.log("Number of records inserted: " + res.insertedCount);
