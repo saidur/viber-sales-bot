@@ -289,7 +289,7 @@ function apiSend(botResponse,category) {
                             "Columns": 6
                     };
 
-                    viberButtons.push(jobElements);
+                    //viberButtons.push(jobElements);
 
                 
                 logger.debug("my element" + jobElements );
