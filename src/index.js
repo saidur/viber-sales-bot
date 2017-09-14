@@ -384,7 +384,7 @@ function findJobs (botResponse,jobCategory)
         return;
     } 
 
-    say(botResponse, 'One second...Let me find out the results!');
+    say(botResponse, 'One second...Let me find out the jobs!');
 
     apiSend(botResponse,jobCategory);
     
