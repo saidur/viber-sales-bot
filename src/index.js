@@ -41,18 +41,21 @@ const SAMPLE_KEYBOARD = {
 		"ActionType": "reply",
 		"ActionBody": "Accounting",
 		"BgColor": "#f7bb3f",
-		"Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
+        "Image":"http://www.chakri.com/images/viber/banking.png"
+        //"Image": "https://s18.postimg.org/9tncn0r85/sushi.png"
+        
 	}, {
 		"Columns": 2,
 		"Rows": 2,
-		"Text": "<br><font color=\"#494E67\"><b>Agro (Plant / Animal / Fisheries)</b></font>",
+		"Text": "<br><font color=\"#494E67\"><b>Education</b></font>",
 		"TextSize": "large",
 		"TextHAlign": "center",
 		"TextVAlign": "middle",
 		"ActionType": "reply",
 		"ActionBody": "Agro",
-		"BgColor": "#7eceea",
-		"Image": "https://s18.postimg.org/ntpef5syd/french.png"
+        "BgColor": "#7eceea",
+        "Image":"http://www.chakri.com/images/viber/education.png"
+		//"Image": "https://s18.postimg.org/ntpef5syd/french.png"
 	}, {
 		"Columns": 2,
 		"Rows": 2,
@@ -62,8 +65,9 @@ const SAMPLE_KEYBOARD = {
 		"TextVAlign": "middle",
 		"ActionType": "reply",
 		"ActionBody": "Bank",
-		"BgColor": "#f6f7f9",
-		"Image": "https://s18.postimg.org/t8y4g4kid/mexican.png"
+        "BgColor": "#f6f7f9",
+        "Image":"http://www.chakri.com/images/viber/engineer.png"
+		//"Image": "https://s18.postimg.org/t8y4g4kid/mexican.png"
 	}, {
 		"Columns": 2,
 		"Rows": 2,
@@ -73,8 +77,9 @@ const SAMPLE_KEYBOARD = {
 		"TextVAlign": "middle",
 		"ActionType": "reply",
 		"ActionBody": "Beauty Care",
-		"BgColor": "#dd8157",
-		"Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
+        "BgColor": "#dd8157",
+        "Image": "http://www.chakri.com/images/viber/finance.png"
+		//"Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
 	}, {
 		"Columns": 2,
 		"Rows": 2,
@@ -158,6 +163,8 @@ function say(response, message) {
     response.send(new TextMessage(message,SAMPLE_KEYBOARD));
 }
 
+
+
 function jobRichMessage(response, message) {
     
     console.log ('rich message' + message);
@@ -177,6 +184,57 @@ function jobRichMessage(response, message) {
 function jobMessage (response,message) {
     
     response.send(new  UrlMessage(message));
+}
+
+function deleteRecord (viberId)
+{
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+        
+        var myquery = { viber_id: viberId };        
+      
+        db.collection("users").remove(myquery, function(err, obj) {
+            if (err) throw err;
+            console.log(obj.result.n + " document(s) deleted");
+            db.close();
+          });
+      
+      
+      });
+
+
+}
+
+function insertRecord (viberUserProfile) {
+    
+    MongoClient.connect(url, function(err, db) {
+        if (err) throw err;
+  
+        var myobj = [
+            { 
+                viber_id: response.userProfile.id, 
+                name: response.userProfile.name,
+                avatar:response.userProfile.avatar,
+                country:response.userProfile.country,
+                language:response.userProfile.language,
+                status:'yes'
+            }
+        
+        ];
+  
+        db.collection("users").insertMany(myobj, function(err, res) {
+            if (err) throw err;
+            console.log("Number of records inserted: " + res.insertedCount);
+            db.close();
+        });
+    });
+    
+
+}
+
+function updateRecord (viberUserProfile) {
+
+    
 }
 
 /*
@@ -334,13 +392,16 @@ app.get('/', function (req, res) {
        };*/
        var userProfile ={ 
         viber_id: 'rISNnSOfFM750aEBkjId0g==',
-        name: 'Tanveer',
-        avatar: null,
-        country: 'BD',
-        language: 'en',
-        status: 'yes' };
+        name: 'Tanveer'
+         };
        
-       bot.postToPublicChat(userProfile, new TextMessage("Thanks for shopping with us"));
+       //bot.postToPublicChat(userProfile, new TextMessage("Thanks for shopping with us"));
+       
+       bot.postToPublicChat(userProfile, [
+        new TextMessage("Here's the product you've requested:"),
+        new UrlMessage("http://my.ecommerce.site/product1"),
+        new TextMessage("Shipping time: 1-3 business days")
+    ]);
        res.status(200).json({ message: 'Connected!' });
 
     });
@@ -352,25 +413,25 @@ bot.onSubscribe(response => {
     var userDetails = bot.getUserDetails(response.userProfile);
     console.log(userDetails);
     MongoClient.connect(url, function(err, db) {
-  if (err) throw err;
+        if (err) throw err;
   
-  var myobj = [
-    { 
-      viber_id: response.userProfile.id, 
-      name: response.userProfile.name,
-      avatar:response.userProfile.avatar,
-      country:response.userProfile.country,
-      language:response.userProfile.language,
-      status:'yes'
-    }
-   
-  ];
+        var myobj = [
+            { 
+            viber_id: response.userProfile.id, 
+            name: response.userProfile.name,
+            avatar:response.userProfile.avatar,
+            country:response.userProfile.country,
+            language:response.userProfile.language,
+            status:'yes'
+            }
+        
+        ];
   
-  db.collection("users").insertMany(myobj, function(err, res) {
-    if (err) throw err;
-    console.log("Number of records inserted: " + res.insertedCount);
-    db.close();
-  });
+        db.collection("users").insertMany(myobj, function(err, res) {
+            if (err) throw err;
+            console.log("Number of records inserted: " + res.insertedCount);
+            db.close();
+        });
 });
 
 
@@ -405,8 +466,11 @@ bot.onTextMessage(/./, (message, response) => {
     console.log (' on text message....'+message.text);
     var isUrl = ValidURL(message.text);
     console.log ('url check '+ isUrl);
+
+
     if (isUrl !=true)
         {
+            
             findJobs (response, message.text);
         }    
 });
