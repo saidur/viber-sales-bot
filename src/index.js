@@ -54,7 +54,7 @@ const SAMPLE_KEYBOARD = {
 		"ActionType": "reply",
 		"ActionBody": "Agro",
         "BgColor": "#7eceea",
-        "Image":"http://www.chakri.com/images/viber/education.png"
+        "Image":"http://www.chakri.com/images/viber/education_chakri.png"
 		//"Image": "https://s18.postimg.org/ntpef5syd/french.png"
 	}, {
 		"Columns": 2,
@@ -66,7 +66,7 @@ const SAMPLE_KEYBOARD = {
 		"ActionType": "reply",
 		"ActionBody": "Bank",
         "BgColor": "#f6f7f9",
-        "Image":"http://www.chakri.com/images/viber/engineer.png"
+        "Image":"http://www.chakri.com/images/viber/engineer_chakri.png"
 		//"Image": "https://s18.postimg.org/t8y4g4kid/mexican.png"
 	}, {
 		"Columns": 2,
@@ -78,7 +78,7 @@ const SAMPLE_KEYBOARD = {
 		"ActionType": "reply",
 		"ActionBody": "Beauty Care",
         "BgColor": "#dd8157",
-        "Image": "http://www.chakri.com/images/viber/finance.png"
+        "Image": "http://www.chakri.com/images/viber/finance_chakri.png"
 		//"Image": "https://s18.postimg.org/x41iip3o5/itallian.png"
 	}, {
 		"Columns": 2,
@@ -330,6 +330,7 @@ function apiSend(botResponse,category) {
                       "TextVAlign": "middle",
                       "TextHAlign": "middle"
                   }];
+                  
                 var jobElements ;
 
                 for (var i=0; i<jobResponse.data.length; i++){
