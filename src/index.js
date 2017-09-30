@@ -340,7 +340,7 @@ function apiSend(botResponse,category) {
                     var category = JSON.stringify(jobResponse.data[i].category);
                     var item_url = JSON.stringify(jobResponse.data[i].item_url);
                     console.log("Got a response: ", item_url);
-                     /*jobElements =  {
+                     jobElements =  {
                             "ActionBody" : item_url,
                             "ActionType" : "open-url",
                             "BgColor": "#85bb65",
@@ -348,9 +348,9 @@ function apiSend(botResponse,category) {
                             "TextOpacity": 60,
                             "Rows": 1,
                             "Columns": 6
-                    };*/
+                    };
 
-                    jobElements = {
+                    /*jobElements = {
                         "Columns": 6,
                         "Rows": 1,
                         "ActionType": "reply",
@@ -359,7 +359,7 @@ function apiSend(botResponse,category) {
                         "TextSize": "small",
                           "TextVAlign": "middle",
                           "TextHAlign": "middle"
-                      };
+                      };*/
 
                     viberButtons.push(jobElements);
 
