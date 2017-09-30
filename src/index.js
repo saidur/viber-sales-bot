@@ -344,6 +344,8 @@ function apiSend(botResponse,category) {
                             "ActionBody" : item_url,
                             "ActionType" : "open-url",
                             "BgColor": "#85bb65",
+                            "BgMediaType": "picture",
+                            "Image": "http://www.images.com/img.jpg",
                             "Text": job_title,
                             "TextOpacity": 60,
                             "Rows": 1,
